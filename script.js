@@ -1502,27 +1502,39 @@ document.addEventListener('DOMContentLoaded', () => {
       const voices = window.speechSynthesis.getVoices() || [];
       if (voices.length === 0) return null;
 
+      // Priority 1: Thalita Neural
       const thalita = voices.find(v => {
         const name = (v.name || '').toLowerCase();
         const uri = (v.voiceURI || '').toLowerCase();
         return name.includes('thalita') || uri.includes('thalita') || uri.includes('pt-br-thalitaneural');
       });
-      if (thalita) return { voice: thalita, label: 'Thalita Neural (Edge)', isThalita: true };
+      if (thalita) return { voice: thalita, label: 'Thalita Neural (pt-BR)', isThalita: true };
 
+      // Priority 2: High quality pt-BR natural / neural voices
       const msNatural = voices.find(v => {
         const name = (v.name || '').toLowerCase();
         const lang = (v.lang || '').replace('_', '-').toLowerCase();
-        return lang === 'pt-br' && (name.includes('natural') || name.includes('online') || name.includes('microsoft'));
+        return lang.startsWith('pt') && (name.includes('natural') || name.includes('online') || name.includes('neural') || name.includes('francisca') || name.includes('antonio'));
       });
-      if (msNatural) return { voice: msNatural, label: 'Microsoft Natural (pt-BR)', isThalita: false };
+      if (msNatural) return { voice: msNatural, label: `${msNatural.name.slice(0, 18)} (pt-BR)`, isThalita: false };
 
+      // Priority 3: Any pt-BR voice
       const ptBr = voices.find(v => {
         const lang = (v.lang || '').replace('_', '-').toLowerCase();
         return lang === 'pt-br';
       });
       if (ptBr) return { voice: ptBr, label: `${ptBr.name.replace(/Google/i, '').trim().slice(0, 18)} (pt-BR)`, isThalita: false };
 
-      return { voice: voices[0], label: `${voices[0].name.slice(0, 18)}`, isThalita: false };
+      // Priority 4: Any Portuguese voice (pt)
+      const ptAny = voices.find(v => {
+        const lang = (v.lang || '').replace('_', '-').toLowerCase();
+        return lang.startsWith('pt');
+      });
+      if (ptAny) return { voice: ptAny, label: `${ptAny.name.replace(/Google/i, '').trim().slice(0, 18)} (pt)`, isThalita: false };
+
+      // CRITICAL: NEVER fallback to voices[0] which could be Spanish (es), French (fr), etc.!
+      // By returning voice: null, utterance.voice remains unset and the browser utilizes its default pt-BR handler.
+      return { voice: null, label: 'Padrão (pt-BR)', isThalita: false };
     }
 
     function updateVoiceUI() {
@@ -1551,15 +1563,26 @@ document.addEventListener('DOMContentLoaded', () => {
       return raw
         .replace(/\\frac\{dy\}\{dt\}|dy\/dt/gi, ' derivada de y sobre d t ')
         .replace(/\\frac\{dP\}\{dt\}|dP\/dt/gi, ' derivada de P sobre d t ')
-        .replace(/\\frac\{\\partial M\}\{\\partial y\}|M_y/gi, ' derivada parcial de M em relação a y ')
-        .replace(/\\frac\{\\partial N\}\{\\partial t\}|N_t/gi, ' derivada parcial de N em relação a t ')
+        .replace(/\\frac\{\\partial M\}\{\\partial y\}|M_y\b/gi, ' derivada parcial de M em relação a y ')
+        .replace(/\\frac\{\\partial N\}\{\\partial t\}|N_t\b/gi, ' derivada parcial de N em relação a t ')
+        .replace(/\\tilde\{M\}_y|M̃_y/gi, ' M til y ')
+        .replace(/\\tilde\{N\}_t|Ñ_t/gi, ' N til t ')
+        .replace(/\\frac\{\\partial f\}\{\\partial y\}|\\partial f\/\\partial y/gi, ' derivada parcial de f em relação a y ')
+        .replace(/\\sum\s*F/gi, ' soma das forças ')
+        .replace(/W\(y_1,\s*y_2\)/gi, ' Wronskiano de y um e y dois ')
+        .replace(/y_1'|y_1\x27/gi, ' y um linha ')
+        .replace(/y_2'|y_2\x27/gi, ' y dois linha ')
         .replace(/y'''/g, ' y três linhas ')
         .replace(/y''/g, ' y duas linhas ')
         .replace(/y'/g, ' y linha ')
+        .replace(/x''/g, ' x duas linhas ')
+        .replace(/x'/g, ' x linha ')
+        .replace(/q''/g, ' q duas linhas ')
+        .replace(/q'/g, ' q linha ')
         .replace(/y_p/gi, ' y particular ')
         .replace(/y_h/gi, ' y homogênea ')
         .replace(/y_0|y\(0\)/gi, ' y no instante zero ')
-        .replace(/y'\(0\)/gi, ' y linha no instante zero ')
+        .replace(/y'\(0\)|y'\s*\(0\)/gi, ' y linha no instante zero ')
         .replace(/PVI/g, ' P V I ')
         .replace(/TEU/g, ' T E U ')
         .replace(/EDOs/gi, ' E D Ós ')
@@ -1570,11 +1593,17 @@ document.addEventListener('DOMContentLoaded', () => {
         .replace(/\\neq|≠/g, ' diferente de ')
         .replace(/\\leq|≤/g, ' menor ou igual a ')
         .replace(/\\geq|≥/g, ' maior ou igual a ')
+        .replace(/>\s*0/g, ' maior que zero ')
+        .replace(/<\s*0/g, ' menor que zero ')
         .replace(/\\pm|±/g, ' mais ou menos ')
         .replace(/\\cdot|·/g, ' vezes ')
         .replace(/\\Delta|Δ/g, ' delta ')
         .replace(/\\lambda|λ/g, ' lambda ')
+        .replace(/\\omega_0|ω_0/g, ' ômega zero ')
         .replace(/\\omega|ω/g, ' ômega ')
+        .replace(/\\gamma|γ/g, ' gama ')
+        .replace(/\\alpha|α/g, ' alfa ')
+        .replace(/\\beta|β/g, ' beta ')
         .replace(/\\mu|μ/g, ' mi ')
         .replace(/\\Psi|Ψ/g, ' psi ')
         .replace(/\\Phi|Φ/g, ' fi ')
@@ -1661,8 +1690,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const utterance = new SpeechSynthesisUtterance(chunks[chunkIdx]);
-        if (cachedVoiceInfo && cachedVoiceInfo.voice) {
-          utterance.voice = cachedVoiceInfo.voice;
+        const voiceObj = (cachedVoiceInfo && cachedVoiceInfo.voice) ? cachedVoiceInfo : resolveVoice();
+        if (voiceObj && voiceObj.voice) {
+          utterance.voice = voiceObj.voice;
         }
         utterance.lang = 'pt-BR';
         utterance.rate = currentSpeed;
@@ -1820,7 +1850,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 3. Fallback to nearest readable container via SpeechSynthesis
-      const targetEl = e.target.closest('p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, .step-box, .case-application, .intro-use-item, .drone-spec-item, .intro-compare-card, .formula-box, .badge') || (e.target.innerText && e.target.innerText.trim().length > 0 ? e.target : null);
+      const targetEl = e.target.closest('p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, .step-box, .case-application, .mini-example, .intro-use-item, .drone-spec-item, .intro-compare-card, .formula-box, .badge') || (e.target.innerText && e.target.innerText.trim().length > 0 ? e.target : null);
 
       if (!targetEl) return;
       const text = extractTextFromElement(targetEl);

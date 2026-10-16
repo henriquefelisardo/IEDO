@@ -1,6 +1,6 @@
 {
   "voice": "pt-BR-ThalitaMultilingualNeural",
-  "count": 88,
+  "count": 102,
   "items": {
     "hero": {
       "text": "Introdução às Equações Diferenciais Ordinárias (I E D O ). Uma E D O não é um monstro algébrico: é apenas uma regra que diz para onde uma curva está apontando em cada instante. Explore os 14 tópicos abaixo com receitas curtas e laboratórios visuais interativos.",
@@ -95,11 +95,11 @@
       "file": "audio/t1-formula.mp3"
     },
     "t1-recipe": {
-      "text": "Se derivada de y sobre d t 0 : A função y(t) está subindo (crescendo) naquele instante. = Se derivada de y sobre d t = 0 : A função está estacionária (ponto de equilíbrio / reta horizontal). Se derivada de y sobre d t A função y(t) está descendo (decaindo) naquele instante. Visão Geométrica (Campo de Direções) Desenhando pequenas setas com inclinação f(t,y) em vários pontos do plano, vemos a \"correnteza de um rio\". Resolver a E D O é soltar um barquinho e desenhar a trajetória que segue as setas!",
+      "text": "Se derivada de y sobre d t maior que zero : A função y(t) está subindo (crescendo) naquele instante. Se derivada de y sobre d t = 0: A função está estacionária (ponto de equilíbrio / reta horizontal). Se derivada de y sobre d t menor que zero : A função y(t) está descendo (decaindo) naquele instante.",
       "file": "audio/t1-recipe.mp3"
     },
     "t1-drone": {
-      "text": "No Caso Central (O Drone): O que é derivada de y sobre d t ?",
+      "text": "No Caso Central (O Drone): O que é derivada de y sobre d t ? Se y(t) é a altitude do drone (m), então derivada de y sobre d t é o que aparece no velocímetro vertical (m/s) Na E D O do gráfico ao lado ( derivada de y sobre d t = -0 , 5y + cosseno t), o piloto automático olha a altura atual y e a rajada de vento cosseno (t) para decidir se o drone sobe ( derivada de y sobre d t maior que zero ), paira no ar ( derivada de y sobre d t = 0) ou desce ( derivada de y sobre d t menor que zero ).",
       "file": "audio/t1-drone.mp3"
     },
     "t2-header": {
@@ -115,11 +115,11 @@
       "file": "audio/t2-formula.mp3"
     },
     "t2-recipe": {
-      "text": "1 Ache onde f(t,y) explode: Divisão por zero, raiz par de negativo ou logaritmo natural ( 0) . Fora daí, existe solução. 2 Derive em relação a y ( f / y ): Veja se surge nova divisão por zero (ex: expoente fracionário y 2/3 2 sobre 3 y -1/3 ). Exemplo Clássico de Quebra de Unicidade Em y linha = 3y 2/3 com y de zero =0 : f é contínua, mas f y = 2 y 1/3 explode em y=0 ! Resultado: duas soluções passam pela origem: y_1(t) = 0 e y_2(t) = t ao cubo .",
+      "text": "1 Ache onde f(t,y) explode: Divisão por zero, raiz par de negativo ou logaritmo natural ( menor ou igual a 0). Fora daí, existe solução. 2 Derive em relação a y ( partial f / partial y): Veja se surge nova divisão por zero (ex: expoente fracionário y elevado a dois terços que resulta em 2 sobre 3 y elevado a - um terço ).",
       "file": "audio/t2-recipe.mp3"
     },
     "t2-drone": {
-      "text": "No Caso Central (O Drone): Rota Previsível vs. Pane no Piloto",
+      "text": "No Caso Central (O Drone): Rota Previsível vs. Pane no Piloto Soltamos o drone em t zero = 0 na altura y no instante zero = y zero . Se a lei de voo for y linha = -y + t, o T E U garante unicidade: duas missões que partem do mesmo ponto jamais terão rotas diferentes. Mas se programarmos y linha = 3y elevado a dois terços partindo do chão y no instante zero =0, o T E U falha ( derivada parcial de f em relação a y explode em y=0) e o drone fica imprevisível: pode tanto continuar parado no chão ( y um = 0) quanto decolar sozinho seguindo y dois = t ao cubo",
       "file": "audio/t2-drone.mp3"
     },
     "t3-header": {
@@ -135,11 +135,11 @@
       "file": "audio/t3-formula.mp3"
     },
     "t3-recipe": {
-      "text": "É LINEAR: t ao cubo y duas linhas + seno (t) y linha - e elevado a t y = cosseno (t) . (As funções feias dependem só de t ). PROIBIDO em Lineares: Potências y ao quadrado , ( y linha ) ao cubo , produtos cruzados y vezes y linha , ou funções dentro de y como seno (y), e elevado a y , 1 sobre y . Por que amamos E D Ós Lineares? Porque nelas vale o Princípio da Superposição : se y_1 e y_2 são soluções da homogênea, qualquer combinação c_1 y_1 + c_2 y_2 também é solução!",
+      "text": "É LINEAR: t ao cubo y duas linhas + seno (t) y linha - e elevado a t y = cosseno (t). (As funções feias dependem só de t). ✘ PROIBIDO em Lineares: Potências y ao quadrado , ( y linha ) ao cubo , produtos cruzados y vezes y linha , ou funções dentro de y como seno (y), e elevado a y , 1 sobre y .",
       "file": "audio/t3-recipe.mp3"
     },
     "t3-drone": {
-      "text": "No Caso Central (O Drone): Somando Efeitos de Voo",
+      "text": "No Caso Central (O Drone): Somando Efeitos de Voo Em baixa velocidade, a resistência do ar e a mola do drone são proporcionais a y linha e y (ex: y duas linhas + y = 0, Linear): se sabemos a resposta do drone ao comando y um e ao comando y dois , a resposta aos dois juntos é simplesmente a soma y um + y dois Já em velocidade supersônica, o arrasto vira quadrático ( y linha = y ao quadrado ) ou o ângulo da câmera é grande ( seno y): a E D O fica Não-Linear e somar duas rotas deixa de funcionar.",
       "file": "audio/t3-drone.mp3"
     },
     "t4-header": {
@@ -155,11 +155,11 @@
       "file": "audio/t4-formula.mp3"
     },
     "t4-recipe": {
-      "text": "1 Separe: Passe tudo que tem y multiplicando dy (esquerda) e tudo que tem t multiplicando dt (direita). 2 Integre ambos os lados: Adicione a constante +C em apenas um dos lados (geralmente no lado do t ). 3 Isole y(t) : Se possível, deixe y explícito em função de t . Exemplo Resolvido Relâmpago Resolva derivada de y sobre d t = - t sobre y : 1) Separe: y ,dy = -t ,dt 2) Integre: integral y ,dy = integral -t ,dt implica que y ao quadrado 2 = - t ao quadrado 2 + C_1 implica que t ao quadrado + y ao quadrado = C (Círculos!).",
+      "text": "1 Separe: Passe tudo que tem y multiplicando dy (esquerda) e tudo que tem t multiplicando dt (direita). 2 Integre ambos os lados: Adicione a constante +C em apenas um dos lados (geralmente no lado do t). 3 Isole y(t): Se possível, deixe y explícito em função de t.",
       "file": "audio/t4-recipe.mp3"
     },
     "t4-drone": {
-      "text": "No Caso Central (O Drone): Manobra de Pouso Programada",
+      "text": "No Caso Central (O Drone): Manobra de Pouso Programada Imagine que o computador do drone reduz a altura y segundo derivada de y sobre d t = -2t vezes y (a velocidade depende do produto entre o tempo t e a altura y). Separamos altura na esquerda e tempo na direita: integral de 1 sobre y dy = integral de -2t dt implica em logaritmo natural de y = -t ao quadrado + C um implica em y(t) = C e elevado a -t ao quadrado . Se o drone iniciou a descida a C = 10 metros , sua curva exata de pouso é y(t) = 10 e elevado a -t ao quadrado",
       "file": "audio/t4-drone.mp3"
     },
     "t5-header": {
@@ -175,11 +175,11 @@
       "file": "audio/t5-formula.mp3"
     },
     "t5-recipe": {
-      "text": "1 Teste de Exatidão: Confirme que derivada parcial de M em relação a y = derivada parcial de N em relação a t . 2 Integre M em t : psi (t,y) = integral M(t,y) ,dt + h(y) (como y é fixo, a \"constante\" é uma função h(y) !). 3 Descubra h(y) : Derive psi em relação a y e iguale a N(t,y) . Finalize com psi (t,y) = C . Exemplo Relâmpago (2ty + 1)dt + (t ao quadrado + 2y)dy = 0 : derivada parcial de M em relação a y = 2t e derivada parcial de N em relação a t = 2t (Exata! ) psi = integral (2ty+1)dt = t ao quadrado y + t + h(y) . psi _y = t ao quadrado + h'(y) = t ao quadrado + 2y implica que h(y) = y ao quadrado . Solução: t ao quadrado y + t + y ao quadrado = C .",
+      "text": "1 Teste de Exatidão: Confirme que derivada parcial de M em relação a y = derivada parcial de N em relação a t . 2 Integre M em t: psi (t,y) = integral de M(t,y) dt + h(y) (como y é fixo, a \"constante\" é uma função h(y) ). 3 Descubra h(y): Derive psi em relação a y e iguale a N(t,y). Finalize com psi (t,y) = C.",
       "file": "audio/t5-recipe.mp3"
     },
     "t5-drone": {
-      "text": "No Caso Central (O Drone): Voando em Curvas de Energia Constante",
+      "text": "No Caso Central (O Drone): Voando em Curvas de Energia Constante O drone possui um sensor de potencial atmosférico psi (t,y) = t ao quadrado y + t + y ao quadrado . Para voar sem gastar energia extra (d psi = 0), a variação de tempo dt e de altura dy precisa respeitar (2ty + 1)dt + (t ao quadrado + 2y)dy = 0. Como derivada parcial de M em relação a y = 2t = derivada parcial de N em relação a t , o campo é conservativo (Exata) e a trajetória do drone segue exatamente a curva de nível psi (t,y) = C",
       "file": "audio/t5-drone.mp3"
     },
     "t6-header": {
@@ -195,11 +195,11 @@
       "file": "audio/t6-formula.mp3"
     },
     "t6-recipe": {
-      "text": "A Tentativa 1 ( mi só de t ): Calcule derivada parcial de M em relação a y - derivada parcial de N em relação a t N . Se depender só de t , então mi (t) = e elevado a integral derivada parcial de M em relação a y - derivada parcial de N em relação a t N dt . B Tentativa 2 ( mi só de y ): Calcule derivada parcial de N em relação a t - derivada parcial de M em relação a y M . Se depender só de y , então mi (y) = e elevado a integral derivada parcial de N em relação a t - derivada parcial de M em relação a y M dy . 3 Multiplique e Resolva: Multiplique a E D O original por mi e resolva normalmente como Exata! Exemplo Relâmpago y ,dt + (2t - y) ,dy = 0 implica que derivada parcial de M em relação a y = 1 diferente de derivada parcial de N em relação a t = 2 . Testando derivada parcial de N em relação a t - derivada parcial de M em relação a y M = 2 - 1 y = 1 sobre y (só depende de y !). Logo mi (y) = e elevado a integral (1/y)dy = y . Multiplicando por y : y ao quadrado dt + (2ty - y ao quadrado )dy = 0 agora tem M _y = 2y = N _t !",
+      "text": "A Tentativa 1 ( mi só de t): Calcule derivada parcial de M em relação a y - derivada parcial de N em relação a t sobre N . Se depender só de t, então mi de t = e elevado a integral de derivada parcial de M em relação a y - derivada parcial de N em relação a t sobre N dt . B Tentativa 2 ( mi só de y): Calcule derivada parcial de N em relação a t - derivada parcial de M em relação a y sobre M . Se depender só de y, então mi de y = e elevado a integral de derivada parcial de N em relação a t - derivada parcial de M em relação a y sobre M dy . 3 Multiplique e Resolva: Multiplique a E D O original por mi e resolva normalmente como Exata",
       "file": "audio/t6-recipe.mp3"
     },
     "t6-drone": {
-      "text": "No Caso Central (O Drone): Calibrando o Sensor com o Fator mi (y)",
+      "text": "No Caso Central (O Drone): Calibrando o Sensor com o Fator mi de y O altímetro do drone transmitiu a equação da rota dividida por y: y dt + (2t - y)dy = 0, parecendo que a energia não se conserva ( derivada parcial de M em relação a y = 1 diferente de derivada parcial de N em relação a t = 2). Aplicando o fator integrante (\"óculos corretivo\") mi de y = y, multiplicamos toda a leitura por y, reequilibramos a balança ( M til y = 2y = N til t ) e descobrimos a curva de voo conservativa psi (t,y) = ty ao quadrado - y ao cubo sobre 3 = C",
       "file": "audio/t6-drone.mp3"
     },
     "t7-header": {
@@ -215,11 +215,11 @@
       "file": "audio/t7-formula.mp3"
     },
     "t7-recipe": {
-      "text": "1 Padronize: Deixe y linha sozinho (coeficiente 1). Identifique quem multiplica y como p(t) (com o sinal!). 2 Ache o Fator Integrante: mi (t) = e elevado a integral p(t) ,dt . 3 Colapse e Integre: Escreva mi (t)y = integral mi (t)q(t) ,dt + C e passe mi (t) dividindo. Exemplo Relâmpago y linha + 2y = 4 : Aqui p(t) = 2 implica que mi (t) = e elevado a integral 2dt = e elevado a 2t . Logo ( e elevado a 2t y)' = 4 e elevado a 2t implica que e elevado a 2t y = 2 e elevado a 2t + C implica que y(t) = 2 + C e elevado a -2t .",
+      "text": "1 Padronize: Deixe y linha sozinho (coeficiente 1). Identifique quem multiplica y como p(t) (com o sinal ). 2 Ache o Fator Integrante: mi de t = e elevado a integral de p(t) dt . 3 Colapse e Integre: Escreva mi de t y = integral de mi de t q(t) dt + C e passe mi de t dividindo.",
       "file": "audio/t7-recipe.mp3"
     },
     "t7-drone": {
-      "text": "No Caso Central (O Drone): Estabilizando na Altitude de Cruzeiro",
+      "text": "No Caso Central (O Drone): Estabilizando na Altitude de Cruzeiro O motor vertical empurra o drone para cima com força q(t) = 4, enquanto o amortecimento atmosférico freia proporcionalmente à altura com p(t) = 2: y linha + 2y = 4. Pelo fator integrante mi de t = e elevado a 2t , obtemos y(t) = 2 ( Cruzeiro ) + C e elevado a -2t ( Ajuste inicial ) . Mesmo que o drone comece muito alto ou no chão, o termo transiente C e elevado a -2t zera rápido e ele crava a altitude de cruzeiro y de equilíbrio = 2 metros",
       "file": "audio/t7-drone.mp3"
     },
     "t8-header": {
@@ -235,11 +235,11 @@
       "file": "audio/t8-formula.mp3"
     },
     "t8-recipe": {
-      "text": "1 Identifique n : Veja a potência de y elevado a n no lado direito (para n diferente de 0, 1 ). 2 Faça a Substituição: Defina v = y 1-n . Pela Regra da Cadeia, v' = (1-n)y -n y linha . 3 Resolva a Linear em v e Desfaça: Ache v(t) por Fator Integrante e volte para y = v 1 1-n . Exemplo Relâmpago (Equação Logística) y linha - y = -y ao quadrado tem n = 2 . 1) Substitua v = y 1-2 = y -1 = 1 sobre y . 2) A E D O em v vira linear: v' + v = 1 implica que v(t) = 1 + C e elevado a -t . 3) Voltando para y = 1 sobre v : y(t) = 1 1 + C e elevado a -t .",
+      "text": "1 Identifique n: Veja a potência de y^n no lado direito (para n diferente de 0, 1). 2 Faça a Substituição: Defina v = y elevado a 1-n . Pela Regra da Cadeia, v linha = (1-n)y elevado a -n y linha . 3 Resolva a Linear em v e Desfaça: Ache v(t) por Fator Integrante e volte para y = v elevado a 1 sobre 1-n .",
       "file": "audio/t8-recipe.mp3"
     },
     "t8-drone": {
-      "text": "No Caso Central (O Drone): Arrasto Quadrático e Teto Operacional",
+      "text": "No Caso Central (O Drone): Arrasto Quadrático e Teto Operacional Quando o drone sobe rápido ( y linha - y = -y ao quadrado ), o ar rarefeito e a turbulência geram uma perda quadrática -y ao quadrado (n=2). Trocando a variável altura y pelo seu inverso v = y elevado a 1-2 = 1 sobre y , o computador de bordo resolve uma equação linear simples ( v linha + v = 1) e descobre que a altitude y(t) = 1 sobre 1+C e elevado a -t satura suavemente no teto máximo y = 1 quilômetros",
       "file": "audio/t8-drone.mp3"
     },
     "t9-header": {
@@ -255,11 +255,11 @@
       "file": "audio/t9-formula.mp3"
     },
     "t9-recipe": {
-      "text": "1 Conjunto Fundamental ( y_1, y_2 ): Toda E D O linear de 2ª ordem tem um espaço de soluções de dimensão 2. 2 Teste do Wronskiano ( W diferente de 0 ): y_1 e y_2 são Linearmente Independentes (LI) se Wronskiano de y1 e y2 = smallmatrix y_1 y_2 y_1' y_2' smallmatrix = y_1 y_2' - y_1' y_2 diferente de 0 . Estrutura Geral da Solução Solução Geral = Homogênea ( y homogênea ) + Particular ( y particular ) . Atenção: Aplique as condições iniciais y de zero e y linha (0) somente no final , quando já tiver somado y homogênea + y particular !",
+      "text": "1 Conjunto Fundamental ( y um , y dois ): Toda E D O linear de 2ª ordem tem um espaço de soluções de dimensão 2. 2 Teste do Wronskiano (W diferente de 0): y um e y dois são Linearmente Independentes ( linearmente independentes ) se Wronskiano de y um e y dois = matriz do Wronskiano = y um y dois linha - y um linha y dois diferente de 0.",
       "file": "audio/t9-recipe.mp3"
     },
     "t9-drone": {
-      "text": "No Caso Central (O Drone): O Impacto no Trem de Pouso ( y de zero e y linha (0) )",
+      "text": "No Caso Central (O Drone): O Impacto no Trem de Pouso ( y no instante zero e y linha no instante zero ) Quando o drone pousa, a Lei de Newton (m y duas linhas = soma das forças ) traz a aceleração y duas linhas da suspensão. Para prever se a barriga do drone vai raspar no chão, não basta saber a compressão inicial da mola y no instante zero ; precisamos também da velocidade vertical do impacto y linha no instante zero Juntas, essas 2 condições iniciais determinam c um e c dois na solução geral y(t) = c um y um + c dois y dois + y particular .",
       "file": "audio/t9-drone.mp3"
     },
     "t10-header": {
@@ -271,11 +271,11 @@
       "file": "audio/t10-intuition.mp3"
     },
     "t10-recipe": {
-      "text": "Sinal de delta Raízes r_1, r_2 Solução Homogênea y homogênea (t) delta 0 Reais distintas r_1 diferente de r_2 c_1 e elevado a r_1 t + c_2 e elevado a r_2 t (Sem oscilação) delta = 0 Raiz real dupla r_1 = r_2 = r c_1 e elevado a rt + c_2 , t , e elevado a rt (Ganha um t !) delta Complexas r = mais ou menos i e elevado a t (c_1 cosseno ( t) + c_2 seno ( t) )",
+      "text": "Sinal de delta Raízes r um , r dois Solução Homogênea y homogênea delta maior que zero Reais distintas r um diferente de r dois c um e elevado a r um t + c dois e elevado a r dois t (Sem oscilação) delta = 0 Raiz real dupla r um = r dois = r c um e elevado a rt + c dois t e elevado a rt (Ganha um t ) delta menor que zero Complexas r = alfa mais ou menos i beta e elevado a alfa t ( c um cosseno ( beta t) + c dois seno ( beta t))",
       "file": "audio/t10-recipe.mp3"
     },
     "t10-drone": {
-      "text": "No Caso Central (O Drone): Escolhendo o Amortecedor do Pouso pelo delta",
+      "text": "No Caso Central (O Drone): Escolhendo o Amortecedor do Pouso pelo delta Na suspensão livre do drone (a y duas linhas + b y linha + cy = 0), o sinal de delta = b ao quadrado - 4ac diz como o drone se comporta ao tocar o solo: delta maior que zero (Óleo pesado): Desce lento e duro sem quicar ( c um e elevado a r um t + c dois e elevado a r dois t ). delta = 0 (Ajuste Crítico Ideal): Absorve o impacto no menor tempo possível sem oscilar (( c um + c dois t) e elevado a rt ). delta menor que zero (Mola macia): O drone quica subindo e descendo enquanto e elevado a alfa t amortece a oscilação",
       "file": "audio/t10-drone.mp3"
     },
     "t11-header": {
@@ -287,11 +287,11 @@
       "file": "audio/t11-intuition.mp3"
     },
     "t11-recipe": {
-      "text": "! Regra Anti-Colisão (Ressonância): Se o seu chute para y particular já aparece dentro da homogênea y homogênea , multiplique o chute por t (ou t ao quadrado ) até parar de repetir! Exemplo de Colisão Em y duas linhas - y = e elevado a t , temos y homogênea = c_1 e elevado a t + c_2 e elevado a -t . Chutar y particular = A e elevado a t daria zero! Como e elevado a t já está em y homogênea , chutamos y particular = A vezes t vezes e elevado a t .",
+      "text": "Regra Anti-Colisão (Ressonância): Se o seu chute para y particular já aparece dentro da homogênea y homogênea , multiplique o chute por t (ou t ao quadrado ) até parar de repetir",
       "file": "audio/t11-recipe.mp3"
     },
     "t11-drone": {
-      "text": "No Caso Central (O Drone): Vibração da Hélice e Perigo de Ressonância",
+      "text": "No Caso Central (O Drone): Vibração da Hélice e Perigo de Ressonância A rotação das hélices aplica uma força periódica g(t) = cosseno ( ômega t) na estrutura do drone. Como cosseno ( ômega t) tem derivadas previsíveis, chutamos y particular = A cosseno ( ômega t) + B seno ( ômega t) para descobrir o quanto o chassi vai vibrar. Porém, se a hélice girar exatamente na frequência natural da mola ( ômega = ômega zero , Colisão ), a resposta ganha um t multiplicando ( y particular = t seno ômega zero t) e a vibração cresce até quebrar o suporte da câmera",
       "file": "audio/t11-drone.mp3"
     },
     "t12-header": {
@@ -307,11 +307,11 @@
       "file": "audio/t12-formula.mp3"
     },
     "t12-recipe": {
-      "text": "1 Ache y_1(t) e y_2(t) : Resolva a homogênea e calcule o Wronskiano W = y_1 y_2' - y_1' y_2 . 2 Integre u_1' e u_2' : Use as fórmulas u_1' = -y_2 g W e u_2' = y_1 g W . 3 Monte y particular : Multiplique u_1(t)y_1(t) + u_2(t)y_2(t) . Exemplo Clássico de Prova y duas linhas + y = secante (t) : Coeficientes indeterminados não funciona para secante (t) ! y_1 = cosseno t, y_2 = seno t implica que W = cosseno ao quadrado t + seno ao quadrado t = 1 . u_1 = - integral seno t secante t ,dt = logaritmo natural cosseno t e u_2 = integral cosseno t secante t ,dt = t . y particular (t) = cosseno (t) logaritmo natural cosseno t + t seno (t) .",
+      "text": "1 Ache y um e y dois : Resolva a homogênea e calcule o Wronskiano W = y um y dois linha - y um linha y dois . 2 Integre u um linha e u dois linha : Use as fórmulas u um linha = - y dois g sobre W e u dois linha = y um g sobre W . 3 Monte y particular : Multiplique u um y um + u dois y dois .",
       "file": "audio/t12-recipe.mp3"
     },
     "t12-drone": {
-      "text": "No Caso Central (O Drone): Rajada Exótica de Vento g(t) = secante (t)",
+      "text": "No Caso Central (O Drone): Rajada Exótica de Vento g(t) = secante (t) E se o drone atravessar uma turbulência severa modelada por g(t) = secante (t) em y duas linhas + y = secante (t)? Não existe \"chute\" tabelado para secante (t) O computador do drone usa Variação de Parâmetros: toma os modos naturais y um = cosseno t e y dois = seno t (W = 1) e calcula em tempo real os pesos móveis u um = logaritmo natural de cosseno t e u dois = t para compensar a rajada.",
       "file": "audio/t12-drone.mp3"
     },
     "t13-header": {
@@ -327,11 +327,11 @@
       "file": "audio/t13-formula.mp3"
     },
     "t13-recipe": {
-      "text": "Papel Físico na E D O Massa-Mola ( x ) Circuito R L C ( q ) Inércia (resiste a acelerar) Massa m Indutor L Dissipação (freia e gasta energia) Amortecedor Resistor R Restauração (puxa de volta) Mola k Capacitor 1/C",
+      "text": "Papel Físico na E D O Massa-Mola (x) Circuito R L C (q) Inércia (resiste a acelerar) Massa m Indutor L Dissipação (freia e gasta energia) Amortecedor gama Resistor R Restauração (puxa de volta) Mola k Capacitor 1/C",
       "file": "audio/t13-recipe.mp3"
     },
     "t13-drone": {
-      "text": "No Caso Central (O Drone): Suspensão da Câmera Placa Eletrônica R L C",
+      "text": "No Caso Central (O Drone): Suspensão da Câmera equivalente a Placa Eletrônica R L C Antes de fabricar a suspensão mecânica da câmera do drone (m x duas linhas + gama x linha + k x = F(t)), os engenheiros simulam tudo na placa eletrônica montando um circuito R L C (L q duas linhas + R q linha + 1 sobre C q = E(t)) Trocar o óleo do amortecedor ( gama ) no trem de pouso tem exatamente o mesmo efeito matemático que girar um potenciômetro para mudar a resistência (R) no circuito do drone.",
       "file": "audio/t13-drone.mp3"
     },
     "t14-header": {
@@ -347,12 +347,68 @@
       "file": "audio/t14-formula.mp3"
     },
     "t14-recipe": {
-      "text": "+ Crescimento ( k 0 ): Populações, colônias de bactérias e juros contínuos. Tempo de Duplicação: T_ dup = logaritmo natural 2 k . - Decaimento ( k Carbono-14, eliminação de fármacos no sangue. Meia-Vida (tempo para cair pela metade): tempo de meia-vida = logaritmo natural 2 k . Receita de Prova para Meia-Vida / Duplicação 1) Use P(0) = P_0 para achar a quantidade inicial. 2) Use o segundo dado de tempo (ex: \"dobrou em 3 horas\" implica que 2P_0 = P_0 e elevado a 3k ) para achar k = logaritmo natural 2 3 . 3) Com k em mãos, calcule P(t) para qualquer tempo pedido!",
+      "text": "+ Crescimento (k maior que zero ): Populações, colônias de bactérias e juros contínuos. Tempo de Duplicação: T_ dup = logaritmo natural 2 sobre k . - Decaimento (k menor que zero ): Carbono-14, eliminação de fármacos no sangue. Meia-Vida (tempo para cair pela metade): tempo de meia-vida = logaritmo natural 2 sobre k .",
       "file": "audio/t14-recipe.mp3"
     },
     "t14-drone": {
-      "text": "No Caso Central (O Drone): Descarga da Bateria ( k 0 )",
+      "text": "No Caso Central (O Drone): Descarga da Bateria (k menor que zero ) e Enxame (k maior que zero ) A bateria reserva do drone descarrega proporcionalmente à carga restante P(t): derivada de P sobre d t = kP implica em P(t) = P zero e elevado a kt . Se ela parte de P zero = 100 % e cai para 50 % em 2 horas (Meia-Vida tempo de meia-vida = 2 horas ), então k = - logaritmo natural 2 sobre 2 aproximadamente -0 , 35 horas elevado a -1 . Já se o drone transmite um alerta em rede para outros drones ( derivada de P sobre d t = +0 , 35P), o número de drones conectados dobra a cada T_ dup = logaritmo natural 2 sobre 0 , 35 aproximadamente 1 , 98 segundos",
       "file": "audio/t14-drone.mp3"
+    },
+    "t1-example": {
+      "text": "Visão Geométrica (Campo de Direções) Desenhando pequenas setas com inclinação f(t,y) em vários pontos do plano, vemos a \"correnteza de um rio\". Resolver a E D O é soltar um barquinho e desenhar a trajetória que segue as setas",
+      "file": "audio/t1-example.mp3"
+    },
+    "t2-example": {
+      "text": "Exemplo Clássico de Quebra de Unicidade Em y linha = 3y elevado a dois terços com y no instante zero =0: f é contínua, mas derivada parcial de f em relação a y = 2 sobre y elevado a um terço explode em y=0 Resultado: duas soluções passam pela origem: y um = 0 e y dois = t ao cubo .",
+      "file": "audio/t2-example.mp3"
+    },
+    "t3-example": {
+      "text": "Por que amamos E D Ós Lineares? Porque nelas vale o Princípio da Superposição: se y um e y dois são soluções da homogênea, qualquer combinação c um y um + c dois y dois também é solução",
+      "file": "audio/t3-example.mp3"
+    },
+    "t4-example": {
+      "text": "Exemplo Resolvido Relâmpago Resolva derivada de y sobre d t = - t sobre y : 1) Separe: y dy = -t dt 2) Integre: integral de y dy = integral de -t dt implica em y ao quadrado sobre 2 = - t ao quadrado sobre 2 + C um implica em t ao quadrado + y ao quadrado = C (Círculos ).",
+      "file": "audio/t4-example.mp3"
+    },
+    "t5-example": {
+      "text": "Exemplo Relâmpago (2ty + 1)dt + (t ao quadrado + 2y)dy = 0: derivada parcial de M em relação a y = 2t e derivada parcial de N em relação a t = 2t (Exata ) psi = integral de (2ty+1)dt = t ao quadrado y + t + h(y). psi y = t ao quadrado + h linha de y = t ao quadrado + 2y implica em h(y) = y ao quadrado . Solução: t ao quadrado y + t + y ao quadrado = C.",
+      "file": "audio/t5-example.mp3"
+    },
+    "t6-example": {
+      "text": "Exemplo Relâmpago y dt + (2t - y) dy = 0 implica em derivada parcial de M em relação a y = 1 diferente de derivada parcial de N em relação a t = 2. Testando derivada parcial de N em relação a t - derivada parcial de M em relação a y sobre M = 2 - 1 sobre y = 1 sobre y (só depende de y ). Logo mi de y = e elevado a integral de (1/y)dy = y. Multiplicando por y: y ao quadrado dt + (2ty - y ao quadrado )dy = 0 agora tem M til y = 2y = N til t",
+      "file": "audio/t6-example.mp3"
+    },
+    "t7-example": {
+      "text": "Exemplo Relâmpago y linha + 2y = 4: Aqui p(t) = 2 implica em mi de t = e elevado a integral de 2dt = e elevado a 2t . Logo ( e elevado a 2t y)' = 4 e elevado a 2t implica em e elevado a 2t y = 2 e elevado a 2t + C implica em y(t) = 2 + C e elevado a -2t .",
+      "file": "audio/t7-example.mp3"
+    },
+    "t8-example": {
+      "text": "Exemplo Relâmpago (Equação Logística) y linha - y = -y ao quadrado tem n = 2. 1) Substitua v = y elevado a 1-2 = y elevado a -1 = 1 sobre y . 2) A E D O em v vira linear: v linha + v = 1 implica em v(t) = 1 + C e elevado a -t . 3) Voltando para y = 1 sobre v : y(t) = 1 sobre 1 + C e elevado a -t .",
+      "file": "audio/t8-example.mp3"
+    },
+    "t9-example": {
+      "text": "Estrutura Geral da Solução Solução Geral = Homogênea ( y homogênea ) + Particular ( y particular ). Atenção: Aplique as condições iniciais y no instante zero e y linha no instante zero somente no final, quando já tiver somado y homogênea + y particular",
+      "file": "audio/t9-example.mp3"
+    },
+    "t10-example": {
+      "text": "Exemplos dos 3 Casos y duas linhas - 3 y linha + 2y = 0 que resulta em r ao quadrado -3r+2=0 que resulta em r=1, 2 implica em y homogênea = c um e elevado a t + c dois e elevado a 2t . y duas linhas + 4 y linha + 4y = 0 que resulta em (r+2) ao quadrado =0 que resulta em r=-2 implica em y homogênea = c um e elevado a -2t + c dois t e elevado a -2t . y duas linhas + 2 y linha + 5y = 0 que resulta em r = -1 mais ou menos 2i implica em y homogênea = e elevado a -t ( c um cosseno 2t + c dois seno 2t).",
+      "file": "audio/t10-example.mp3"
+    },
+    "t11-example": {
+      "text": "Exemplo de Colisão Em y duas linhas - y = e elevado a t , temos y homogênea = c um e elevado a t + c dois e elevado a -t . Chutar y particular = A e elevado a t daria zero Como e elevado a t já está em y homogênea , chutamos y particular = A vezes t vezes e elevado a t .",
+      "file": "audio/t11-example.mp3"
+    },
+    "t12-example": {
+      "text": "Exemplo Clássico de Prova y duas linhas + y = secante (t): Coeficientes indeterminados não funciona para secante (t) y um = cosseno t, y dois = seno t implica em W = cosseno ao quadrado t + seno ao quadrado t = 1. u um = - integral de seno t secante t dt = logaritmo natural de cosseno t e u dois = integral de cosseno t secante t dt = t. y particular = cosseno (t) logaritmo natural de cosseno t + t seno (t).",
+      "file": "audio/t12-example.mp3"
+    },
+    "t13-example": {
+      "text": "Os 3 Regimes de Amortecimento Sem amortecimento ( gama = R = 0): Oscila eternamente com ômega zero = raiz quadrada de k/m = 1/ raiz quadrada de LC . Subamortecido ( delta menor que zero ): Oscila perdendo amplitude. Superamortecido ( delta maior que zero ): Volta ao equilíbrio devagar, sem oscilar.",
+      "file": "audio/t13-example.mp3"
+    },
+    "t14-example": {
+      "text": "Receita de Prova para Meia-Vida / Duplicação 1) Use P no instante zero = P zero para achar a quantidade inicial. 2) Use o segundo dado de tempo (ex: \"dobrou em 3 horas\" implica em 2 P zero = P zero e elevado a 3k ) para achar k = logaritmo natural 2 sobre 3 . 3) Com k em mãos, calcule P(t) para qualquer tempo pedido",
+      "file": "audio/t14-example.mp3"
     }
   }
 }

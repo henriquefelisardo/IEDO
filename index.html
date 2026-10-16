@@ -323,7 +323,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t1-example">
             <div class="mini-example-title">⚡ Visão Geométrica (Campo de Direções)</div>
             Desenhando pequenas setas com inclinação \(f(t,y)\) em vários pontos do plano, vemos a "correnteza de um rio". Resolver a EDO é soltar um barquinho e desenhar a trajetória que segue as setas!
           </div>
@@ -394,7 +394,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t2-example">
             <div class="mini-example-title">⚡ Exemplo Clássico de Quebra de Unicidade</div>
             Em \(y' = 3y^{2/3}\) com \(y(0)=0\): \(f\) é contínua, mas \(\frac{\partial f}{\partial y} = \frac{2}{y^{1/3}}\) explode em \(y=0\)! Resultado: <strong>duas soluções</strong> passam pela origem: \(y_1(t) = 0\) e \(y_2(t) = t^3\).
           </div>
@@ -459,7 +459,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t3-example">
             <div class="mini-example-title">⚡ Por que amamos EDOs Lineares?</div>
             Porque nelas vale o <strong>Princípio da Superposição</strong>: se \(y_1\) e \(y_2\) são soluções da homogênea, qualquer combinação \(c_1 y_1 + c_2 y_2\) também é solução!
           </div>
@@ -529,7 +529,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t4-example">
             <div class="mini-example-title">⚡ Exemplo Resolvido Relâmpago</div>
             Resolva \(\frac{dy}{dt} = -\frac{t}{y}\):<br/>
             1) Separe: \(y\,dy = -t\,dt\)<br/>
@@ -606,7 +606,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t5-example">
             <div class="mini-example-title">⚡ Exemplo Relâmpago</div>
             \((2ty + 1)dt + (t^2 + 2y)dy = 0\):<br/>
             • \(M_y = 2t\) e \(N_t = 2t\) (Exata! ✔)<br/>
@@ -679,7 +679,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t6-example">
             <div class="mini-example-title">⚡ Exemplo Relâmpago</div>
             \(y\,dt + (2t - y)\,dy = 0 \implies M_y = 1 \neq N_t = 2\).<br/>
             Testando \(\frac{N_t - M_y}{M} = \frac{2 - 1}{y} = \frac{1}{y}\) (só depende de \(y\)!).<br/>
@@ -752,7 +752,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t7-example">
             <div class="mini-example-title">⚡ Exemplo Relâmpago</div>
             \(y' + 2y = 4\): Aqui \(p(t) = 2 \implies \mu(t) = e^{\int 2dt} = e^{2t}\).<br/>
             Logo \((e^{2t}y)' = 4e^{2t} \implies e^{2t}y = 2e^{2t} + C \implies y(t) = 2 + Ce^{-2t}\).
@@ -826,7 +826,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t8-example">
             <div class="mini-example-title">⚡ Exemplo Relâmpago (Equação Logística)</div>
             \(y' - y = -y^2\) tem \(n = 2\).<br/>
             1) Substitua \(v = y^{1-2} = y^{-1} = \frac{1}{y}\).<br/>
@@ -898,7 +898,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t9-example">
             <div class="mini-example-title">⚡ Estrutura Geral da Solução</div>
             <strong>Solução Geral = Homogênea (\(y_h\)) + Particular (\(y_p\))</strong>.<br/>
             Atenção: Aplique as condições iniciais \(y(0)\) e \(y'(0)\) <strong>somente no final</strong>, quando já tiver somado \(y_h + y_p\)!
@@ -980,7 +980,7 @@
             </tbody>
           </table>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t10-example">
             <div class="mini-example-title">⚡ Exemplos dos 3 Casos</div>
             • \(y'' - 3y' + 2y = 0 \to r^2-3r+2=0 \to r=1, 2 \implies y_h = c_1 e^t + c_2 e^{2t}\).<br/>
             • \(y'' + 4y' + 4y = 0 \to (r+2)^2=0 \to r=-2 \implies y_h = c_1 e^{-2t} + c_2 t e^{-2t}\).<br/>
@@ -1066,7 +1066,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t11-example">
             <div class="mini-example-title">⚡ Exemplo de Colisão</div>
             Em \(y'' - y = e^t\), temos \(y_h = c_1 e^t + c_2 e^{-t}\).<br/>
             Chutar \(y_p = Ae^t\) daria zero! Como \(e^t\) já está em \(y_h\), chutamos \(\mathbf{y_p = A \cdot t \cdot e^t}\).
@@ -1139,7 +1139,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t12-example">
             <div class="mini-example-title">⚡ Exemplo Clássico de Prova</div>
             \(y'' + y = \sec(t)\): Coeficientes indeterminados <em>não funciona</em> para \(\sec(t)\)!<br/>
             • \(y_1 = \cos t, y_2 = \sin t \implies W = \cos^2 t + \sin^2 t = 1\).<br/>
@@ -1224,7 +1224,7 @@
             </tbody>
           </table>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t13-example">
             <div class="mini-example-title">⚡ Os 3 Regimes de Amortecimento</div>
             • <strong>Sem amortecimento (\(\gamma = R = 0\)):</strong> Oscila eternamente com \(\omega_0 = \sqrt{k/m} = 1/\sqrt{LC}\).<br/>
             • <strong>Subamortecido (\(\Delta < 0\)):</strong> Oscila perdendo amplitude.<br/>
@@ -1295,7 +1295,7 @@
             </div>
           </div>
 
-          <div class="mini-example">
+          <div class="mini-example" data-audio="t14-example">
             <div class="mini-example-title">⚡ Receita de Prova para Meia-Vida / Duplicação</div>
             1) Use \(P(0) = P_0\) para achar a quantidade inicial.<br/>
             2) Use o segundo dado de tempo (ex: "dobrou em 3 horas" \(\implies 2P_0 = P_0 e^{3k}\)) para achar \(k = \frac{\ln 2}{3}\).<br/>
