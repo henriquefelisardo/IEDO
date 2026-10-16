@@ -33,14 +33,42 @@
       <div class="brand-title">
         <span class="brand-icon">∫</span> IEDO Visual
       </div>
-      <button class="theme-btn" id="themeToggle" title="Alternar Tema Claro/Escuro">☀/☾</button>
+      <div class="brand-actions">
+        <button class="tts-header-btn" id="ttsToggle" title="Ativar/Desativar Leitura por Clique (Voz Thalita Neural)">
+          <span class="tts-btn-icon">🎙️</span>
+          <span class="tts-btn-label">Voz: OFF</span>
+        </button>
+        <button class="theme-btn" id="themeToggle" title="Alternar Tema Claro/Escuro">☀/☾</button>
+      </div>
     </div>
 
-    <!-- Sidebar Quick Search & Progress -->
+    <!-- Sidebar Quick Search, Edge TTS Assistant & Progress -->
     <div class="sidebar-tools">
       <div class="sidebar-search-wrap">
         <input type="search" id="topicSearch" class="sidebar-search" placeholder="🔍 Filtrar tópico (ex: RLC, Exata)..." autocomplete="off" />
       </div>
+
+      <!-- Edge TTS Voice Assistant Card -->
+      <div class="sidebar-tts-card" id="sidebarTtsCard">
+        <div class="tts-card-header">
+          <div class="tts-card-title-wrap">
+            <span class="tts-card-icon">🎙️</span>
+            <span class="tts-card-title">Leitor por Clique</span>
+          </div>
+          <label class="tts-switch" title="Ligar/Desligar leitura por clique">
+            <input type="checkbox" id="ttsCheckbox" aria-label="Ativar leitura em voz alta por clique" />
+            <span class="tts-slider"></span>
+          </label>
+        </div>
+        <div class="tts-card-desc" id="sidebarTtsDesc">
+          Clique em qualquer texto para ouvir com a voz neural.
+        </div>
+        <div class="tts-voice-badge" id="sidebarVoiceBadge" title="Status da voz neural sintetizada">
+          <span class="tts-dot"></span>
+          <span id="sidebarVoiceName">Detectando voz...</span>
+        </div>
+      </div>
+
       <div class="sidebar-progress-meta">
         <span id="progressLabel">Leitura: Tópico 1 / 14</span>
         <span id="progressPercent">0%</span>
@@ -1290,6 +1318,29 @@
     </section>
 
   </main>
+
+  <!-- Floating Edge TTS Audio Dock -->
+  <aside class="tts-floating-dock" id="ttsFloatingDock" aria-label="Controle de Leitura em Voz Alta">
+    <div class="tts-dock-main">
+      <div class="tts-dock-status">
+        <div class="tts-pulse-icon" id="ttsPulseIcon" title="Status da Leitura">🎙️</div>
+        <div class="tts-dock-info">
+          <div class="tts-dock-title" id="ttsDockTitle">Leitor por Clique Ativo</div>
+          <div class="tts-dock-sub" id="ttsDockSub">Clique em qualquer texto para ouvir com Thalita</div>
+        </div>
+      </div>
+      <div class="tts-dock-controls">
+        <div class="tts-equalizer" id="ttsEqualizer" aria-label="Reproduzindo áudio" aria-hidden="true">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </div>
+        <button class="tts-stop-btn" id="ttsStopBtn" title="Parar fala (ou pressione a tecla Esc)" disabled>⏹️ Parar</button>
+        <button class="tts-close-btn" id="ttsCloseBtn" title="Desativar leitura por clique" aria-label="Fechar leitor">✕</button>
+      </div>
+    </div>
+  </aside>
 
   <!-- Floating Back to Top Button -->
   <button class="back-to-top" id="backToTop" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>

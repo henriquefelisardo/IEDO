@@ -1429,4 +1429,356 @@ document.addEventListener('DOMContentLoaded', () => {
     p0Slider.addEventListener('input', draw);
     draw();
   })();
+
+  // ==========================================================================
+  // Edge TTS (pt-BR-ThalitaNeural) Client-Side Click-to-Read Assistant
+  // ==========================================================================
+  (() => {
+    const ttsToggle = document.getElementById('ttsToggle');
+    const ttsCheckbox = document.getElementById('ttsCheckbox');
+    const sidebarTtsCard = document.getElementById('sidebarTtsCard');
+    const sidebarVoiceBadge = document.getElementById('sidebarVoiceBadge');
+    const sidebarVoiceName = document.getElementById('sidebarVoiceName');
+    const ttsFloatingDock = document.getElementById('ttsFloatingDock');
+    const ttsDockTitle = document.getElementById('ttsDockTitle');
+    const ttsDockSub = document.getElementById('ttsDockSub');
+    const ttsStopBtn = document.getElementById('ttsStopBtn');
+    const ttsCloseBtn = document.getElementById('ttsCloseBtn');
+
+    if (!('speechSynthesis' in window)) {
+      if (sidebarVoiceName) sidebarVoiceName.textContent = 'Não suportado no navegador';
+      if (ttsToggle) ttsToggle.style.display = 'none';
+      if (sidebarTtsCard) sidebarTtsCard.style.display = 'none';
+      return;
+    }
+
+    let isTtsActive = false;
+    let cachedVoiceInfo = null;
+    let currentController = null;
+    let currentHighlightedEl = null;
+
+    // 1. Resolve pt-BR-ThalitaNeural or best available Portuguese voice
+    function resolveVoice() {
+      const voices = window.speechSynthesis.getVoices() || [];
+      if (voices.length === 0) return null;
+
+      // 1. Exact or partial match for Thalita / pt-BR-ThalitaNeural (Edge TTS default neural voice)
+      const thalita = voices.find(v => {
+        const name = (v.name || '').toLowerCase();
+        const uri = (v.voiceURI || '').toLowerCase();
+        return name.includes('thalita') || uri.includes('thalita') || uri.includes('pt-br-thalitaneural');
+      });
+      if (thalita) {
+        return { voice: thalita, label: 'Thalita Neural (Edge)', isThalita: true };
+      }
+
+      // 2. Microsoft Natural pt-BR voice
+      const msNatural = voices.find(v => {
+        const name = (v.name || '').toLowerCase();
+        const lang = (v.lang || '').replace('_', '-').toLowerCase();
+        return lang === 'pt-br' && (name.includes('natural') || name.includes('online') || name.includes('microsoft'));
+      });
+      if (msNatural) {
+        return { voice: msNatural, label: 'Microsoft Natural (pt-BR)', isThalita: false };
+      }
+
+      // 3. Any Brazilian Portuguese voice
+      const ptBr = voices.find(v => {
+        const lang = (v.lang || '').replace('_', '-').toLowerCase();
+        return lang === 'pt-br';
+      });
+      if (ptBr) {
+        return { voice: ptBr, label: `${ptBr.name.replace(/Google/i, '').trim().slice(0, 18)} (pt-BR)`, isThalita: false };
+      }
+
+      // 4. Any Portuguese voice
+      const pt = voices.find(v => (v.lang || '').toLowerCase().startsWith('pt'));
+      if (pt) {
+        return { voice: pt, label: `${pt.name.slice(0, 18)} (pt)`, isThalita: false };
+      }
+
+      return { voice: voices[0], label: `${voices[0].name.slice(0, 18)}`, isThalita: false };
+    }
+
+    function updateVoiceUI() {
+      cachedVoiceInfo = resolveVoice();
+      if (!cachedVoiceInfo) {
+        if (sidebarVoiceName) sidebarVoiceName.textContent = 'Carregando vozes...';
+        return;
+      }
+
+      if (sidebarVoiceName) {
+        sidebarVoiceName.textContent = cachedVoiceInfo.label;
+      }
+      if (sidebarVoiceBadge) {
+        if (cachedVoiceInfo.isThalita) {
+          sidebarVoiceBadge.title = 'Voz original pt-BR-ThalitaNeural do Edge TTS detectada!';
+          sidebarVoiceBadge.style.borderColor = 'var(--accent-mint)';
+          sidebarVoiceBadge.style.color = 'var(--accent-mint)';
+        } else {
+          sidebarVoiceBadge.title = 'Voz sintetizada do navegador. Dica: no Microsoft Edge a voz pt-BR-ThalitaNeural é ativada nativamente.';
+        }
+      }
+      if (ttsDockSub && !ttsFloatingDock.classList.contains('speaking')) {
+        ttsDockSub.textContent = cachedVoiceInfo.isThalita
+          ? 'Clique em qualquer texto para ouvir (Thalita Neural)'
+          : `Clique em qualquer texto para ouvir (${cachedVoiceInfo.label})`;
+      }
+    }
+
+    // Load voices
+    updateVoiceUI();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = updateVoiceUI;
+    }
+
+    // 2. Sanitize and prepare text (converting mathematical notations phonetically)
+    function sanitizeForSpeech(raw) {
+      if (!raw) return '';
+      return raw
+        .replace(/\\frac\{dy\}\{dt\}|dy\/dt/gi, ' derivada de y sobre d t ')
+        .replace(/\\frac\{dP\}\{dt\}|dP\/dt/gi, ' derivada de P sobre d t ')
+        .replace(/\\frac\{\\partial M\}\{\\partial y\}|M_y/gi, ' derivada parcial de M em relação a y ')
+        .replace(/\\frac\{\\partial N\}\{\\partial t\}|N_t/gi, ' derivada parcial de N em relação a t ')
+        .replace(/y'''/g, ' y três linhas ')
+        .replace(/y''/g, ' y duas linhas ')
+        .replace(/y'/g, ' y linha ')
+        .replace(/y_p/gi, ' y particular ')
+        .replace(/y_h/gi, ' y homogênea ')
+        .replace(/y_0|y\(0\)/gi, ' y no instante zero ')
+        .replace(/y'\(0\)/gi, ' y linha no instante zero ')
+        .replace(/PVI/g, ' P V I ')
+        .replace(/TEU/g, ' T E U ')
+        .replace(/EDOs/gi, ' E D Ós ')
+        .replace(/EDO/gi, ' E D O ')
+        .replace(/RLC/gi, ' R L C ')
+        .replace(/\\implies|⇒|⟹/g, ' implica em ')
+        .replace(/\\approx|≈/g, ' aproximadamente ')
+        .replace(/\\neq|≠/g, ' diferente de ')
+        .replace(/\\leq|≤/g, ' menor ou igual a ')
+        .replace(/\\geq|≥/g, ' maior ou igual a ')
+        .replace(/\\pm|±/g, ' mais ou menos ')
+        .replace(/\\cdot|·/g, ' vezes ')
+        .replace(/\\Delta|Δ/g, ' delta ')
+        .replace(/\\lambda|λ/g, ' lambda ')
+        .replace(/\\omega|ω/g, ' ômega ')
+        .replace(/\\mu|μ/g, ' mi ')
+        .replace(/\\Psi|Ψ/g, ' psi ')
+        .replace(/\\Phi|Φ/g, ' fi ')
+        .replace(/e\^/g, ' e elevado a ')
+        .replace(/\^2/g, ' ao quadrado ')
+        .replace(/\^3/g, ' ao cubo ')
+        .replace(/T_\{1\/2\}|T_1\/2/g, ' meia-vida ')
+        .replace(/T_dup|T_\{dup\}/g, ' tempo de duplicação ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function extractTextFromElement(el) {
+      const selection = window.getSelection ? window.getSelection().toString().trim() : '';
+      if (selection && selection.length > 1) {
+        return sanitizeForSpeech(selection);
+      }
+      if (!el) return '';
+      const clone = el.cloneNode(true);
+      clone.querySelectorAll('.katex-mathml').forEach(m => m.remove());
+      clone.querySelectorAll('button, input, select, canvas, script, style, .sidebar, .tts-floating-dock, .mobile-toggle, .back-to-top').forEach(m => m.remove());
+      return sanitizeForSpeech(clone.innerText || clone.textContent || '');
+    }
+
+    // 3. Sentence Chunking & Audio Playback Controller (Chromium safe)
+    function playSpeech(text) {
+      stopSpeech();
+      if (!text || text.length < 2) return;
+
+      if (!cachedVoiceInfo) updateVoiceUI();
+
+      // Split into safe chunks
+      const sentences = text.match(/[^.!?;\n]+[.!?;\n]+|[^.!?;\n]+$/g) || [text];
+      const chunks = [];
+      for (let s of sentences) {
+        s = s.trim();
+        if (!s) continue;
+        if (s.length > 180) {
+          const parts = s.split(/,\s+/);
+          let buf = '';
+          for (const p of parts) {
+            if ((buf + ', ' + p).length < 160) {
+              buf = buf ? buf + ', ' + p : p;
+            } else {
+              if (buf) chunks.push(buf);
+              buf = p;
+            }
+          }
+          if (buf) chunks.push(buf);
+        } else {
+          chunks.push(s);
+        }
+      }
+
+      if (chunks.length === 0) return;
+
+      let chunkIdx = 0;
+      let aborted = false;
+
+      function speakNextChunk() {
+        if (aborted || chunkIdx >= chunks.length) {
+          onPlaybackFinished();
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(chunks[chunkIdx]);
+        if (cachedVoiceInfo && cachedVoiceInfo.voice) {
+          utterance.voice = cachedVoiceInfo.voice;
+        }
+        utterance.lang = 'pt-BR';
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+
+        utterance.onstart = () => {
+          if (chunkIdx === 0) {
+            if (ttsFloatingDock) ttsFloatingDock.classList.add('speaking');
+            if (ttsStopBtn) ttsStopBtn.disabled = false;
+          }
+        };
+
+        utterance.onend = () => {
+          chunkIdx++;
+          speakNextChunk();
+        };
+
+        utterance.onerror = (e) => {
+          if (e.error === 'interrupted' || e.error === 'canceled') return;
+          console.warn('TTS playback issue:', e);
+          onPlaybackFinished();
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      speakNextChunk();
+
+      currentController = {
+        abort: () => {
+          aborted = true;
+          window.speechSynthesis.cancel();
+          onPlaybackFinished();
+        }
+      };
+    }
+
+    function onPlaybackFinished() {
+      if (ttsFloatingDock) ttsFloatingDock.classList.remove('speaking');
+      if (ttsStopBtn) ttsStopBtn.disabled = true;
+      if (currentHighlightedEl) {
+        currentHighlightedEl.classList.remove('tts-reading-highlight');
+        currentHighlightedEl = null;
+      }
+      if (ttsDockTitle) ttsDockTitle.textContent = 'Leitor por Clique Ativo';
+      if (ttsDockSub && cachedVoiceInfo) {
+        ttsDockSub.textContent = cachedVoiceInfo.isThalita
+          ? 'Clique em qualquer texto para ouvir (Thalita Neural)'
+          : `Clique em qualquer texto para ouvir (${cachedVoiceInfo.label})`;
+      }
+    }
+
+    function stopSpeech() {
+      if (currentController) {
+        currentController.abort();
+        currentController = null;
+      } else {
+        window.speechSynthesis.cancel();
+        onPlaybackFinished();
+      }
+    }
+
+    // 4. Toggle State Management
+    function setTtsState(enabled) {
+      isTtsActive = Boolean(enabled);
+      document.body.classList.toggle('tts-active', isTtsActive);
+
+      if (ttsCheckbox) ttsCheckbox.checked = isTtsActive;
+      if (sidebarTtsCard) sidebarTtsCard.classList.toggle('active', isTtsActive);
+      if (ttsToggle) {
+        ttsToggle.classList.toggle('active', isTtsActive);
+        const label = ttsToggle.querySelector('.tts-btn-label');
+        if (label) label.textContent = isTtsActive ? 'Voz: ON' : 'Voz: OFF';
+      }
+      if (ttsFloatingDock) {
+        ttsFloatingDock.classList.toggle('visible', isTtsActive);
+      }
+
+      if (!isTtsActive) {
+        stopSpeech();
+      } else {
+        updateVoiceUI();
+      }
+
+      try {
+        localStorage.setItem('iedo_tts_active', isTtsActive ? '1' : '0');
+      } catch (err) {}
+    }
+
+    if (ttsToggle) {
+      ttsToggle.addEventListener('click', () => setTtsState(!isTtsActive));
+    }
+    if (ttsCheckbox) {
+      ttsCheckbox.addEventListener('change', (e) => setTtsState(e.target.checked));
+    }
+    if (ttsCloseBtn) {
+      ttsCloseBtn.addEventListener('click', () => setTtsState(false));
+    }
+    if (ttsStopBtn) {
+      ttsStopBtn.addEventListener('click', stopSpeech);
+    }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isTtsActive) {
+        stopSpeech();
+      }
+    });
+
+    // Restore saved user preference (defaults to off)
+    try {
+      if (localStorage.getItem('iedo_tts_active') === '1') {
+        setTtsState(true);
+      }
+    } catch (err) {}
+
+    // 5. Global Click Handler on ANY Text
+    document.addEventListener('click', (e) => {
+      if (!isTtsActive) return;
+
+      // Ignore interactive controls, dock, canvas, sidebar navigation
+      if (e.target.closest('button, input, select, canvas, .tts-floating-dock, #mobileMenuBtn, #themeToggle, .sidebar')) {
+        return;
+      }
+
+      // Find nearest text container
+      const targetEl = e.target.closest('p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, .step-box, .case-application, .intro-use-item, .drone-spec-item, .intro-compare-card, .formula-box, .badge') || (e.target.innerText && e.target.innerText.trim().length > 0 ? e.target : null);
+
+      if (!targetEl) return;
+
+      const text = extractTextFromElement(targetEl);
+      if (!text || text.length < 2) return;
+
+      // Update highlight
+      if (currentHighlightedEl) {
+        currentHighlightedEl.classList.remove('tts-reading-highlight');
+      }
+      currentHighlightedEl = targetEl;
+      currentHighlightedEl.classList.add('tts-reading-highlight');
+
+      // Update floating dock text snippet
+      if (ttsDockTitle) {
+        const snippet = text.slice(0, 42) + (text.length > 42 ? '...' : '');
+        ttsDockTitle.textContent = `Lendo: "${snippet}"`;
+      }
+      if (ttsDockSub && cachedVoiceInfo) {
+        ttsDockSub.textContent = `Voz: ${cachedVoiceInfo.label}`;
+      }
+
+      // Play audio
+      playSpeech(text);
+    });
+  })();
 });

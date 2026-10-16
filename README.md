@@ -55,6 +55,12 @@ Muitas vezes o estudo de EDOs parece abstrato por focar apenas em manipulações
   - **Modo Escuro ("Observatório Noturno"):** Fundo técnico quadriculado (*blueprint grid*) em obsidiana quente com cartões assimétricos e sombras arquitetônicas deslocadas.
   - **Modo Claro ("Caderno de Engenharia / Papel Pólen"):** Alternância instantânea (`☀/☾`) para paleta editorial clara de alto contraste.
 - **Nitidez Retina (High-DPI Canvas):** Todos os 14 elementos `<canvas>` escalam automaticamente com `window.devicePixelRatio` para máxima nitidez em telas 4K, notebooks e smartphones.
+- **🎙️ Assistente de Voz Edge TTS (pt-BR-ThalitaNeural) 100% Estático:**
+  - Compatibilidade nativa com **GitHub Pages** (sem frameworks, sem build, sem servidores backend ou custos de API).
+  - Priorização automática da voz neural **`pt-BR-ThalitaNeural`** do Microsoft Edge TTS (com detecção inteligente e fallback para as melhores vozes em pt-BR do sistema).
+  - **Leitura Interativa por Clique:** Quando ativado pelo usuário, clicar em qualquer parágrafo, título, fórmula matemática ou cartão inicia a narração com destaque visual (*reading highlight*) e equalizador animado no dock flutuante.
+  - Sanitização fonética inteligente de notações matemáticas e KaTeX (ex: pronúncia correta de $\frac{dy}{dt}$, $y'$, $y''$, $\Delta$, $\mu$, $e^{kt}$, Wronskiano, etc.).
+  - Controle completo com botão de parar (`⏹️ Parar`), tecla `Esc` e persistência de preferência no `localStorage`.
 - **Totalmente Responsivo e Compatível com Toque:**
   - Layout adaptativo em múltiplos *breakpoints* (`1180px`, `980px`, `640px`).
   - Ponte de eventos *Touch-to-Mouse* nativa nos gráficos interativos para uso no celular/tablet.
