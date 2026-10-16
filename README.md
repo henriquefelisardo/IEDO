@@ -55,12 +55,13 @@ Muitas vezes o estudo de EDOs parece abstrato por focar apenas em manipulações
   - **Modo Escuro ("Observatório Noturno"):** Fundo técnico quadriculado (*blueprint grid*) em obsidiana quente com cartões assimétricos e sombras arquitetônicas deslocadas.
   - **Modo Claro ("Caderno de Engenharia / Papel Pólen"):** Alternância instantânea (`☀/☾`) para paleta editorial clara de alto contraste.
 - **Nitidez Retina (High-DPI Canvas):** Todos os 14 elementos `<canvas>` escalam automaticamente com `window.devicePixelRatio` para máxima nitidez em telas 4K, notebooks e smartphones.
-- **🎙️ Assistente de Voz Edge TTS (pt-BR-ThalitaNeural) 100% Estático:**
-  - Compatibilidade nativa com **GitHub Pages** (sem frameworks, sem build, sem servidores backend ou custos de API).
-  - Priorização automática da voz neural **`pt-BR-ThalitaNeural`** do Microsoft Edge TTS (com detecção inteligente e fallback para as melhores vozes em pt-BR do sistema).
+- **🎙️ Assistente de Voz Edge TTS (pt-BR-ThalitaNeural) 100% Estático & Instantâneo:**
+  - **88 Áudios Pré-renderizados em MP3 (`audio/`):** Todos os 88 blocos de texto (introdução, caso do drone, bússola rápida e os 14 tópicos) vêm pré-gravados em alta fidelidade com a voz **`pt-BR-ThalitaNeural`** do Edge TTS, garantindo **reprodução instantânea (0ms de espera)** em qualquer navegador (Chrome, Firefox, Safari, Edge e Mobile).
+  - **⚡ Seletor de Velocidade da Voz:** Controle de velocidade integrado no card da barra lateral e no dock flutuante (`0.75x`, `1.0x Normal`, `1.25x`, `1.5x` e `2.0x`), com persistência no `localStorage`.
+  - **Fallback Híbrido Inteligente:** Se o usuário selecionar um trecho arbitrário de texto com o cursor, o sistema aciona automaticamente a `Web Speech API` sincronizada na mesma velocidade.
   - **Leitura Interativa por Clique:** Quando ativado pelo usuário, clicar em qualquer parágrafo, título, fórmula matemática ou cartão inicia a narração com destaque visual (*reading highlight*) e equalizador animado no dock flutuante.
   - Sanitização fonética inteligente de notações matemáticas e KaTeX (ex: pronúncia correta de $\frac{dy}{dt}$, $y'$, $y''$, $\Delta$, $\mu$, $e^{kt}$, Wronskiano, etc.).
-  - Controle completo com botão de parar (`⏹️ Parar`), tecla `Esc` e persistência de preferência no `localStorage`.
+  - Controle completo com botão de parar (`⏹️ Parar`), tecla `Esc` e salvamento de preferências.
 - **Totalmente Responsivo e Compatível com Toque:**
   - Layout adaptativo em múltiplos *breakpoints* (`1180px`, `980px`, `640px`).
   - Ponte de eventos *Touch-to-Mouse* nativa nos gráficos interativos para uso no celular/tablet.
@@ -84,8 +85,9 @@ O projeto não requer instalação de pacotes ou servidor de build:
 
 ```text
 IEDO/
-├── index.html   # Estrutura semântica, Contexto Geral, Caso Central do Drone, Bússola e 14 Tópicos
-├── styles.css   # Sistema de design editorial, temas escuro/claro, animações e responsividade
-├── script.js    # 14 motores de simulação matemática em HTML5 Canvas, High-DPI e interatividade UI
+├── audio/       # 88 áudios pré-sintetizados em MP3 (pt-BR-ThalitaNeural) e manifest.json
+├── index.html   # Estrutura semântica, Caso Central do Drone, Bússola e 14 Tópicos
+├── styles.css   # Sistema de design editorial, temas escuro/claro, dock de áudio e responsividade
+├── script.js    # 14 laboratórios em Canvas, leitor de áudio instantâneo, controle de velocidade e UI
 └── README.md    # Documentação completa do projeto
 ```

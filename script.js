@@ -1431,7 +1431,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   // ==========================================================================
-  // Edge TTS (pt-BR-ThalitaNeural) Client-Side Click-to-Read Assistant
+  // Edge TTS (pt-BR-ThalitaNeural) Hybrid Instant Audio & Speech Assistant
   // ==========================================================================
   (() => {
     const ttsToggle = document.getElementById('ttsToggle');
@@ -1439,100 +1439,113 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarTtsCard = document.getElementById('sidebarTtsCard');
     const sidebarVoiceBadge = document.getElementById('sidebarVoiceBadge');
     const sidebarVoiceName = document.getElementById('sidebarVoiceName');
+    const ttsSpeedSelect = document.getElementById('ttsSpeedSelect');
+    const ttsDockSpeedSelect = document.getElementById('ttsDockSpeedSelect');
     const ttsFloatingDock = document.getElementById('ttsFloatingDock');
     const ttsDockTitle = document.getElementById('ttsDockTitle');
     const ttsDockSub = document.getElementById('ttsDockSub');
     const ttsStopBtn = document.getElementById('ttsStopBtn');
     const ttsCloseBtn = document.getElementById('ttsCloseBtn');
 
-    if (!('speechSynthesis' in window)) {
-      if (sidebarVoiceName) sidebarVoiceName.textContent = 'Não suportado no navegador';
-      if (ttsToggle) ttsToggle.style.display = 'none';
-      if (sidebarTtsCard) sidebarTtsCard.style.display = 'none';
-      return;
-    }
-
     let isTtsActive = false;
+    let currentSpeed = 1.0;
     let cachedVoiceInfo = null;
     let currentController = null;
     let currentHighlightedEl = null;
 
-    // 1. Resolve pt-BR-ThalitaNeural or best available Portuguese voice
+    // Single reusable HTML5 Audio instance for zero-latency MP3 playback
+    const audioPlayer = new Audio();
+
+    // 1. Voice Speed Control (Synced across sidebar card and dock)
+    function setSpeed(speedVal) {
+      currentSpeed = parseFloat(speedVal) || 1.0;
+      if (ttsSpeedSelect) ttsSpeedSelect.value = String(currentSpeed);
+      if (ttsDockSpeedSelect) ttsDockSpeedSelect.value = String(currentSpeed);
+      if (audioPlayer) audioPlayer.playbackRate = currentSpeed;
+      try {
+        localStorage.setItem('iedo_tts_speed', String(currentSpeed));
+      } catch (err) {}
+    }
+
+    // Restore saved speed
+    try {
+      const savedSpeed = localStorage.getItem('iedo_tts_speed');
+      if (savedSpeed) setSpeed(savedSpeed);
+    } catch (err) {}
+
+    if (ttsSpeedSelect) {
+      ttsSpeedSelect.addEventListener('change', (e) => setSpeed(e.target.value));
+    }
+    if (ttsDockSpeedSelect) {
+      ttsDockSpeedSelect.addEventListener('change', (e) => setSpeed(e.target.value));
+    }
+
+    // Audio Player Events
+    audioPlayer.addEventListener('play', () => {
+      if (ttsFloatingDock) ttsFloatingDock.classList.add('speaking');
+      if (ttsStopBtn) ttsStopBtn.disabled = false;
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+      onPlaybackEnded();
+    });
+
+    audioPlayer.addEventListener('pause', () => {
+      if (audioPlayer.currentTime >= audioPlayer.duration) {
+        onPlaybackEnded();
+      }
+    });
+
+    // 2. Web Speech API Voice Resolution (Fallback for custom selected text)
     function resolveVoice() {
+      if (!('speechSynthesis' in window)) return null;
       const voices = window.speechSynthesis.getVoices() || [];
       if (voices.length === 0) return null;
 
-      // 1. Exact or partial match for Thalita / pt-BR-ThalitaNeural (Edge TTS default neural voice)
       const thalita = voices.find(v => {
         const name = (v.name || '').toLowerCase();
         const uri = (v.voiceURI || '').toLowerCase();
         return name.includes('thalita') || uri.includes('thalita') || uri.includes('pt-br-thalitaneural');
       });
-      if (thalita) {
-        return { voice: thalita, label: 'Thalita Neural (Edge)', isThalita: true };
-      }
+      if (thalita) return { voice: thalita, label: 'Thalita Neural (Edge)', isThalita: true };
 
-      // 2. Microsoft Natural pt-BR voice
       const msNatural = voices.find(v => {
         const name = (v.name || '').toLowerCase();
         const lang = (v.lang || '').replace('_', '-').toLowerCase();
         return lang === 'pt-br' && (name.includes('natural') || name.includes('online') || name.includes('microsoft'));
       });
-      if (msNatural) {
-        return { voice: msNatural, label: 'Microsoft Natural (pt-BR)', isThalita: false };
-      }
+      if (msNatural) return { voice: msNatural, label: 'Microsoft Natural (pt-BR)', isThalita: false };
 
-      // 3. Any Brazilian Portuguese voice
       const ptBr = voices.find(v => {
         const lang = (v.lang || '').replace('_', '-').toLowerCase();
         return lang === 'pt-br';
       });
-      if (ptBr) {
-        return { voice: ptBr, label: `${ptBr.name.replace(/Google/i, '').trim().slice(0, 18)} (pt-BR)`, isThalita: false };
-      }
-
-      // 4. Any Portuguese voice
-      const pt = voices.find(v => (v.lang || '').toLowerCase().startsWith('pt'));
-      if (pt) {
-        return { voice: pt, label: `${pt.name.slice(0, 18)} (pt)`, isThalita: false };
-      }
+      if (ptBr) return { voice: ptBr, label: `${ptBr.name.replace(/Google/i, '').trim().slice(0, 18)} (pt-BR)`, isThalita: false };
 
       return { voice: voices[0], label: `${voices[0].name.slice(0, 18)}`, isThalita: false };
     }
 
     function updateVoiceUI() {
       cachedVoiceInfo = resolveVoice();
-      if (!cachedVoiceInfo) {
-        if (sidebarVoiceName) sidebarVoiceName.textContent = 'Carregando vozes...';
-        return;
-      }
-
       if (sidebarVoiceName) {
-        sidebarVoiceName.textContent = cachedVoiceInfo.label;
+        sidebarVoiceName.textContent = 'Thalita Neural (Instantâneo)';
       }
       if (sidebarVoiceBadge) {
-        if (cachedVoiceInfo.isThalita) {
-          sidebarVoiceBadge.title = 'Voz original pt-BR-ThalitaNeural do Edge TTS detectada!';
-          sidebarVoiceBadge.style.borderColor = 'var(--accent-mint)';
-          sidebarVoiceBadge.style.color = 'var(--accent-mint)';
-        } else {
-          sidebarVoiceBadge.title = 'Voz sintetizada do navegador. Dica: no Microsoft Edge a voz pt-BR-ThalitaNeural é ativada nativamente.';
-        }
+        sidebarVoiceBadge.title = 'Áudio pré-carregado em MP3 com a voz neural Thalita do Edge TTS (0ms de espera!)';
+        sidebarVoiceBadge.style.borderColor = 'var(--accent-mint)';
+        sidebarVoiceBadge.style.color = 'var(--accent-mint)';
       }
       if (ttsDockSub && !ttsFloatingDock.classList.contains('speaking')) {
-        ttsDockSub.textContent = cachedVoiceInfo.isThalita
-          ? 'Clique em qualquer texto para ouvir (Thalita Neural)'
-          : `Clique em qualquer texto para ouvir (${cachedVoiceInfo.label})`;
+        ttsDockSub.textContent = `Clique em qualquer texto para ouvir (Thalita Neural · ${currentSpeed}x)`;
       }
     }
 
-    // Load voices
     updateVoiceUI();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+    if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
       window.speechSynthesis.onvoiceschanged = updateVoiceUI;
     }
 
-    // 2. Sanitize and prepare text (converting mathematical notations phonetically)
+    // 3. Mathematical text cleaner for SpeechSynthesis fallback
     function sanitizeForSpeech(raw) {
       if (!raw) return '';
       return raw
@@ -1575,10 +1588,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function extractTextFromElement(el) {
-      const selection = window.getSelection ? window.getSelection().toString().trim() : '';
-      if (selection && selection.length > 1) {
-        return sanitizeForSpeech(selection);
-      }
       if (!el) return '';
       const clone = el.cloneNode(true);
       clone.querySelectorAll('.katex-mathml').forEach(m => m.remove());
@@ -1586,14 +1595,38 @@ document.addEventListener('DOMContentLoaded', () => {
       return sanitizeForSpeech(clone.innerText || clone.textContent || '');
     }
 
-    // 3. Sentence Chunking & Audio Playback Controller (Chromium safe)
-    function playSpeech(text) {
-      stopSpeech();
-      if (!text || text.length < 2) return;
+    // 4. Play Preloaded MP3 Audio (Instant zero-wait)
+    function playPreloadedAudio(audioKey, element) {
+      stopAllAudio();
+      setHighlight(element);
 
-      if (!cachedVoiceInfo) updateVoiceUI();
+      const audioSrc = `audio/${audioKey}.mp3`;
+      audioPlayer.src = audioSrc;
+      audioPlayer.playbackRate = currentSpeed;
 
-      // Split into safe chunks
+      if (ttsDockTitle) {
+        const preview = element.innerText ? element.innerText.trim().slice(0, 40) : audioKey;
+        ttsDockTitle.textContent = `Ouvindo: "${preview}..."`;
+      }
+      if (ttsDockSub) {
+        ttsDockSub.textContent = `Voz: Thalita Neural (Áudio Instantâneo · ${currentSpeed}x)`;
+      }
+
+      const playPromise = audioPlayer.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn(`Audio ${audioSrc} failed, falling back to Web Speech API:`, err);
+          const fallbackText = extractTextFromElement(element);
+          playSpeechFallback(fallbackText);
+        });
+      }
+    }
+
+    // 5. SpeechSynthesis Fallback (for custom text selections)
+    function playSpeechFallback(text) {
+      if (!('speechSynthesis' in window) || !text || text.length < 2) return;
+      window.speechSynthesis.cancel();
+
       const sentences = text.match(/[^.!?;\n]+[.!?;\n]+|[^.!?;\n]+$/g) || [text];
       const chunks = [];
       for (let s of sentences) {
@@ -1623,7 +1656,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function speakNextChunk() {
         if (aborted || chunkIdx >= chunks.length) {
-          onPlaybackFinished();
+          onPlaybackEnded();
           return;
         }
 
@@ -1632,7 +1665,7 @@ document.addEventListener('DOMContentLoaded', () => {
           utterance.voice = cachedVoiceInfo.voice;
         }
         utterance.lang = 'pt-BR';
-        utterance.rate = 1.0;
+        utterance.rate = currentSpeed;
         utterance.pitch = 1.0;
 
         utterance.onstart = () => {
@@ -1649,8 +1682,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         utterance.onerror = (e) => {
           if (e.error === 'interrupted' || e.error === 'canceled') return;
-          console.warn('TTS playback issue:', e);
-          onPlaybackFinished();
+          onPlaybackEnded();
         };
 
         window.speechSynthesis.speak(utterance);
@@ -1662,12 +1694,22 @@ document.addEventListener('DOMContentLoaded', () => {
         abort: () => {
           aborted = true;
           window.speechSynthesis.cancel();
-          onPlaybackFinished();
+          onPlaybackEnded();
         }
       };
     }
 
-    function onPlaybackFinished() {
+    function setHighlight(el) {
+      if (currentHighlightedEl) {
+        currentHighlightedEl.classList.remove('tts-reading-highlight');
+      }
+      currentHighlightedEl = el;
+      if (currentHighlightedEl) {
+        currentHighlightedEl.classList.add('tts-reading-highlight');
+      }
+    }
+
+    function onPlaybackEnded() {
       if (ttsFloatingDock) ttsFloatingDock.classList.remove('speaking');
       if (ttsStopBtn) ttsStopBtn.disabled = true;
       if (currentHighlightedEl) {
@@ -1675,24 +1717,27 @@ document.addEventListener('DOMContentLoaded', () => {
         currentHighlightedEl = null;
       }
       if (ttsDockTitle) ttsDockTitle.textContent = 'Leitor por Clique Ativo';
-      if (ttsDockSub && cachedVoiceInfo) {
-        ttsDockSub.textContent = cachedVoiceInfo.isThalita
-          ? 'Clique em qualquer texto para ouvir (Thalita Neural)'
-          : `Clique em qualquer texto para ouvir (${cachedVoiceInfo.label})`;
+      if (ttsDockSub) {
+        ttsDockSub.textContent = `Clique em qualquer texto para ouvir (Thalita Neural · ${currentSpeed}x)`;
       }
     }
 
-    function stopSpeech() {
+    function stopAllAudio() {
+      if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+      }
       if (currentController) {
         currentController.abort();
         currentController = null;
-      } else {
-        window.speechSynthesis.cancel();
-        onPlaybackFinished();
       }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      onPlaybackEnded();
     }
 
-    // 4. Toggle State Management
+    // 6. Toggle State Management
     function setTtsState(enabled) {
       isTtsActive = Boolean(enabled);
       document.body.classList.toggle('tts-active', isTtsActive);
@@ -1709,7 +1754,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!isTtsActive) {
-        stopSpeech();
+        stopAllAudio();
       } else {
         updateVoiceUI();
       }
@@ -1729,11 +1774,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ttsCloseBtn.addEventListener('click', () => setTtsState(false));
     }
     if (ttsStopBtn) {
-      ttsStopBtn.addEventListener('click', stopSpeech);
+      ttsStopBtn.addEventListener('click', stopAllAudio);
     }
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isTtsActive) {
-        stopSpeech();
+        stopAllAudio();
       }
     });
 
@@ -1744,7 +1789,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (err) {}
 
-    // 5. Global Click Handler on ANY Text
+    // 7. Global Click Handler on ANY Text
     document.addEventListener('click', (e) => {
       if (!isTtsActive) return;
 
@@ -1753,32 +1798,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Find nearest text container
+      // 1. Manual user text selection prioritized
+      const selection = window.getSelection ? window.getSelection().toString().trim() : '';
+      if (selection && selection.length > 1) {
+        stopAllAudio();
+        const clean = sanitizeForSpeech(selection);
+        if (ttsDockTitle) ttsDockTitle.textContent = `Lendo seleção: "${clean.slice(0, 36)}..."`;
+        if (ttsDockSub) ttsDockSub.textContent = `Voz: Sintetizada (${currentSpeed}x)`;
+        playSpeechFallback(clean);
+        return;
+      }
+
+      // 2. Click on element with pre-rendered MP3 audio
+      const audioTarget = e.target.closest('[data-audio]');
+      if (audioTarget) {
+        const audioKey = audioTarget.getAttribute('data-audio');
+        if (audioKey) {
+          playPreloadedAudio(audioKey, audioTarget);
+          return;
+        }
+      }
+
+      // 3. Fallback to nearest readable container via SpeechSynthesis
       const targetEl = e.target.closest('p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, .step-box, .case-application, .intro-use-item, .drone-spec-item, .intro-compare-card, .formula-box, .badge') || (e.target.innerText && e.target.innerText.trim().length > 0 ? e.target : null);
 
       if (!targetEl) return;
-
       const text = extractTextFromElement(targetEl);
       if (!text || text.length < 2) return;
 
-      // Update highlight
-      if (currentHighlightedEl) {
-        currentHighlightedEl.classList.remove('tts-reading-highlight');
-      }
-      currentHighlightedEl = targetEl;
-      currentHighlightedEl.classList.add('tts-reading-highlight');
-
-      // Update floating dock text snippet
-      if (ttsDockTitle) {
-        const snippet = text.slice(0, 42) + (text.length > 42 ? '...' : '');
-        ttsDockTitle.textContent = `Lendo: "${snippet}"`;
-      }
-      if (ttsDockSub && cachedVoiceInfo) {
-        ttsDockSub.textContent = `Voz: ${cachedVoiceInfo.label}`;
-      }
-
-      // Play audio
-      playSpeech(text);
+      stopAllAudio();
+      setHighlight(targetEl);
+      if (ttsDockTitle) ttsDockTitle.textContent = `Lendo: "${text.slice(0, 36)}..."`;
+      playSpeechFallback(text);
     });
   })();
 });

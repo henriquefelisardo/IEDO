@@ -61,11 +61,24 @@
           </label>
         </div>
         <div class="tts-card-desc" id="sidebarTtsDesc">
-          Clique em qualquer texto para ouvir com a voz neural.
+          Clique em qualquer texto para ouvir com áudio instantâneo da voz neural.
         </div>
-        <div class="tts-voice-badge" id="sidebarVoiceBadge" title="Status da voz neural sintetizada">
+
+        <!-- Seletor de Velocidade da Voz -->
+        <div class="tts-speed-control">
+          <label for="ttsSpeedSelect" class="tts-speed-label">⚡ Velocidade:</label>
+          <select id="ttsSpeedSelect" class="tts-speed-select" title="Velocidade da voz">
+            <option value="0.75">0.75x (Lento)</option>
+            <option value="1.0" selected>1.0x (Normal)</option>
+            <option value="1.25">1.25x (Rápido)</option>
+            <option value="1.5">1.5x (Muito Rápido)</option>
+            <option value="2.0">2.0x (Ultra)</option>
+          </select>
+        </div>
+
+        <div class="tts-voice-badge" id="sidebarVoiceBadge" title="Status da voz neural Thalita">
           <span class="tts-dot"></span>
-          <span id="sidebarVoiceName">Detectando voz...</span>
+          <span id="sidebarVoiceName">Thalita Neural (Instantâneo)</span>
         </div>
       </div>
 
@@ -126,7 +139,7 @@
   <main class="main-content">
 
     <!-- Hero -->
-    <header class="hero">
+    <header class="hero" data-audio="hero">
       <div class="hero-badges">
         <span class="badge badge-blue">14 Tópicos Interativos</span>
         <span class="badge badge-emerald">Direto ao Ponto</span>
@@ -144,12 +157,12 @@
         <h2>💡 Antes de Tudo: O que é uma EDO e para que ela serve?</h2>
         <span class="badge badge-blue">Visão Geral Simples</span>
       </div>
-      <p class="intro-edo-lead">
+      <p class="intro-edo-lead" data-audio="intro-lead">
         No mundo real, quase tudo está mudando o tempo todo: a temperatura de um café esfriando, a velocidade de um carro freando ou o saldo de uma conta rendendo juros. A <strong>Equação Diferencial Ordinária (EDO)</strong> é a ferramenta matemática criada para <strong>prever o futuro de qualquer coisa que muda no tempo</strong>.
       </p>
 
       <div class="intro-compare-grid">
-        <div class="intro-compare-card">
+        <div class="intro-compare-card" data-audio="intro-compare-1">
           <div class="intro-compare-title">📷 Equação Comum (Álgebra) = Uma Foto</div>
           <p>
             Exemplo: \(2x + 3 = 11 \implies x = 4\).<br/>
@@ -157,7 +170,7 @@
           </p>
         </div>
 
-        <div class="intro-compare-card highlight">
+        <div class="intro-compare-card highlight" data-audio="intro-compare-2">
           <div class="intro-compare-title">🎬 Equação Diferencial (EDO) = Um Filme Inteiro</div>
           <p>
             Exemplo: \(\frac{dy}{dt} = 2y \implies y(t) = C e^{2t}\).<br/>
@@ -165,7 +178,7 @@
           </p>
         </div>
 
-        <div class="intro-compare-card">
+        <div class="intro-compare-card" data-audio="intro-compare-3">
           <div class="intro-compare-title">🔍 Por que tem esse nome?</div>
           <p>
             • <strong>Equação:</strong> Tem sinal de \(=\) e uma incógnita \(y(t)\).<br/>
@@ -180,19 +193,19 @@
         Na natureza, raramente sabemos de cara a fórmula pronta de \(y(t)\), mas é muito fácil medir <strong>quão rápido algo está mudando agora</strong> (a derivada!). Por isso, as leis da ciência são escritas como EDOs:
       </p>
       <div class="intro-uses-grid">
-        <div class="intro-use-item">
+        <div class="intro-use-item" data-audio="intro-use-1">
           <strong>🚀 Física e Engenharia</strong>
           A 2ª Lei de Newton (\(F = m \cdot y''\)) é uma EDO! Usada para projetar suspensões de carros, órbitas de satélites, pontes, aviões e circuitos elétricos (RLC).
         </div>
-        <div class="intro-use-item">
+        <div class="intro-use-item" data-audio="intro-use-2">
           <strong>🧬 Biologia e Medicina</strong>
           Prever o crescimento de colônias de bactérias, o avanço de epidemias e a velocidade com que um remédio é absorvido e eliminado da corrente sanguínea.
         </div>
-        <div class="intro-use-item">
+        <div class="intro-use-item" data-audio="intro-use-3">
           <strong>🌡️ Clima, Química e Energia</strong>
           Calcular em quanto tempo um reator ou xícara de café esfria (Lei de Resfriamento de Newton), velocidade de reações químicas e meia-vida do Carbono-14.
         </div>
-        <div class="intro-use-item">
+        <div class="intro-use-item" data-audio="intro-use-4">
           <strong>💰 Economia e Finanças</strong>
           Modelar juros compostos contínuos (\(\frac{dS}{dt} = rS\)), evolução de dívidas com aportes mensais e precificação de opções no mercado financeiro.
         </div>
@@ -205,23 +218,23 @@
         <h2>🚁 Caso Central de Exemplo: O Drone Autônomo de Exploração</h2>
         <span class="badge badge-emerald">Fio Condutor Prático nos 14 Tópicos</span>
       </div>
-      <p class="central-case-lead">
+      <p class="central-case-lead" data-audio="central-lead">
         Para que nenhuma fórmula pareça abstrata, vamos acompanhar <strong>um único sistema real do início ao fim</strong>: você é o engenheiro responsável por programar o voo, o pouso e a bateria de um <strong>Drone Autônomo</strong> ao longo do tempo \(t\) (em segundos). Veja o que cada variável representa na prática:
       </p>
       <div class="central-case-grid">
-        <div class="central-case-item">
+        <div class="central-case-item" data-audio="central-item-1">
           <strong>1. Altitude de Voo \(y(t)\) (Tópicos 1 a 8)</strong>
           \(y(t)\) é a <strong>altura do drone (em metros)</strong> e \(y' = \frac{dy}{dt}\) é a <strong>velocidade vertical (m/s)</strong> ditada pelos motores, vento e sensores de altitude.
         </div>
-        <div class="central-case-item">
+        <div class="central-case-item" data-audio="central-item-2">
           <strong>2. Suspensão de Pouso \(y''\) (Tópicos 9 a 12)</strong>
           No impacto do pouso entra a aceleração \(y''\) (\(F = m y''\)): a mola e o amortecedor do trem de pouso absorvem choques e vibrações das hélices \(g(t)\).
         </div>
-        <div class="central-case-item">
+        <div class="central-case-item" data-audio="central-item-3">
           <strong>3. Mola Mecânica ⇄ Placa RLC (Tópico 13)</strong>
           A suspensão mecânica da câmera (\(m, \gamma, k\)) obedece exatamente à mesma EDO do filtro eletrônico RLC (\(L, R, 1/C\)) da placa-mãe do drone.
         </div>
-        <div class="central-case-item">
+        <div class="central-case-item" data-audio="central-item-4">
           <strong>4. Bateria / Gerador \(P(t)\) (Tópico 14)</strong>
           A carga energética \(P(t)\) descarrega (ou um enxame de drones cresce) a uma taxa proporcional à quantidade atual: \(\frac{dP}{dt} = kP\).
         </div>
@@ -234,32 +247,32 @@
         <h2>🧭 Bússola Rápida: Bateu o olho na prova, qual método usar?</h2>
       </div>
       <div class="compass-grid">
-        <a href="#t4" class="compass-item">
+        <a href="#t4"  class="compass-item" data-audio="compass-item-1">
           <span class="compass-pattern">y' = f(t) · g(y)</span>
           <span class="compass-method">→ Variáveis Separáveis</span>
           <span class="compass-tip">Jogue y para a esquerda, t para a direita e integre.</span>
         </a>
-        <a href="#t7" class="compass-item">
+        <a href="#t7"  class="compass-item" data-audio="compass-item-2">
           <span class="compass-pattern">y' + p(t)y = q(t)</span>
           <span class="compass-method">→ Linear de 1ª Ordem</span>
           <span class="compass-tip">Multiplique pelo Fator Integrante μ(t) = e^(∫p dt).</span>
         </a>
-        <a href="#t8" class="compass-item">
+        <a href="#t8"  class="compass-item" data-audio="compass-item-3">
           <span class="compass-pattern">y' + p(t)y = q(t)yⁿ</span>
           <span class="compass-method">→ Bernoulli</span>
           <span class="compass-tip">Substitua v = y^(1-n) para transformá-la em Linear.</span>
         </a>
-        <a href="#t5" class="compass-item">
+        <a href="#t5"  class="compass-item" data-audio="compass-item-4">
           <span class="compass-pattern">M(t,y)dt + N(t,y)dy = 0</span>
           <span class="compass-method">→ Exata ou Semiexata</span>
           <span class="compass-tip">Teste ∂M/∂y = ∂N/∂t. Se falhar, ache μ(t) ou μ(y).</span>
         </a>
-        <a href="#t10" class="compass-item">
+        <a href="#t10"  class="compass-item" data-audio="compass-item-5">
           <span class="compass-pattern">ay'' + by' + cy = 0</span>
           <span class="compass-method">→ Homogênea 2ª Ordem</span>
           <span class="compass-tip">Báskara em ar² + br + c = 0. Olhe o sinal de Δ!</span>
         </a>
-        <a href="#t11" class="compass-item">
+        <a href="#t11"  class="compass-item" data-audio="compass-item-6">
           <span class="compass-pattern">ay'' + by' + cy = g(t)</span>
           <span class="compass-method">→ Indeterminados / Variação</span>
           <span class="compass-tip">g(t) simples? Chute y_p. g(t) exótico (tan, sec)? Wronskiano!</span>
@@ -271,7 +284,7 @@
          TÓPICO 1: (dy/dt) - É A TAXA DE VARIAÇÃO
     ====================================================================== -->
     <section class="topic-card" id="t1">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t1-header">
         <div class="topic-title-wrap">
           <div class="topic-index">1</div>
           <div>
@@ -284,18 +297,18 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t1-intuition">
             <strong>Ideia Central:</strong> Enquanto uma equação comum pede um número \(x\), uma EDO pede uma <strong>função inteira \(y(t)\)</strong> cuja velocidade de mudança \(\frac{dy}{dt}\) obedece a uma lei conhecida.
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t1-formula">
             $$\frac{dy}{dt} = f(t, y)$$
             <div class="formula-caption">
               Lê-se: "A inclinação de \(y\) no instante \(t\) vale \(f(t,y)\)"
             </div>
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t1-recipe">
             <div class="recipe-step">
               <span class="step-badge">&gt;</span>
               <div><strong>Se \(\frac{dy}{dt} > 0\):</strong> A função \(y(t)\) está <strong>subindo</strong> (crescendo) naquele instante.</div>
@@ -315,7 +328,7 @@
             Desenhando pequenas setas com inclinação \(f(t,y)\) em vários pontos do plano, vemos a "correnteza de um rio". Resolver a EDO é soltar um barquinho e desenhar a trajetória que segue as setas!
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t1-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): O que é \(\frac{dy}{dt}\)?</div>
             Se \(y(t)\) é a <strong>altitude do drone (m)</strong>, então \(\frac{dy}{dt}\) é o que aparece no <strong>velocímetro vertical (m/s)</strong>! Na EDO do gráfico ao lado (\(\frac{dy}{dt} = -0{,}5y + \cos t\)), o piloto automático olha a altura atual \(y\) e a rajada de vento \(\cos(t)\) para decidir se o drone sobe (\(\frac{dy}{dt} > 0\)), paira no ar (\(\frac{dy}{dt} = 0\)) ou desce (\(\frac{dy}{dt} < 0\)).
           </div>
@@ -348,7 +361,7 @@
          TÓPICO 2: TEOREMA DE EXISTÊNCIA E UNICIDADE (TEU)
     ====================================================================== -->
     <section class="topic-card" id="t2">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t2-header">
         <div class="topic-title-wrap">
           <div class="topic-index">2</div>
           <div>
@@ -361,16 +374,16 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t2-intuition">
             <strong>Ideia Central:</strong> Antes de gastar papel tentando resolver \(y' = f(t,y)\) com ponto inicial \(y(t_0)=y_0\), o TEU garante se <strong>existe</strong> uma curva passando por \((t_0, y_0)\) e se duas curvas distintas <strong>jamais se cruzam</strong>.
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t2-formula">
             $$\begin{cases} y' = f(t,y) \\ y(t_0) = y_0 \end{cases} \implies \begin{array}{l} \text{1. } f(t,y) \text{ contínua} \to \textbf{Existe solução} \\ \text{2. } \frac{\partial f}{\partial y} \text{ contínua} \to \textbf{Solução é ÚNICA} \end{array}$$
             <div class="formula-caption">Ambas precisam ser contínuas num retângulo aberto ao redor de \((t_0, y_0)\).</div>
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t2-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Ache onde \(f(t,y)\) explode:</strong> Divisão por zero, raiz par de negativo ou \(\ln(\le 0)\). Fora daí, <em>existe</em> solução.</div>
@@ -386,7 +399,7 @@
             Em \(y' = 3y^{2/3}\) com \(y(0)=0\): \(f\) é contínua, mas \(\frac{\partial f}{\partial y} = \frac{2}{y^{1/3}}\) explode em \(y=0\)! Resultado: <strong>duas soluções</strong> passam pela origem: \(y_1(t) = 0\) e \(y_2(t) = t^3\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t2-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Rota Previsível vs. Pane no Piloto</div>
             Soltamos o drone em \(t_0 = 0\) na altura \(y(0) = y_0\). Se a lei de voo for \(y' = -y + t\), o TEU garante <strong>unicidade</strong>: duas missões que partem do mesmo ponto jamais terão rotas diferentes. Mas se programarmos \(y' = 3y^{2/3}\) partindo do chão \(y(0)=0\), o TEU falha (\(\partial f/\partial y\) explode em \(y=0\)) e o drone fica imprevisível: pode tanto continuar parado no chão (\(y_1 = 0\)) quanto decolar sozinho seguindo \(y_2 = t^3\)!
           </div>
@@ -414,7 +427,7 @@
          TÓPICO 3: LINEARIDADE
     ====================================================================== -->
     <section class="topic-card" id="t3">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t3-header">
         <div class="topic-title-wrap">
           <div class="topic-index">3</div>
           <div>
@@ -427,15 +440,15 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t3-intuition">
             <strong>Regra de Ouro:</strong> Olhe apenas para a variável dependente <strong>\(y\) e suas derivadas (\(y', y''\))</strong>. A variável \(t\) pode fazer a loucura que quiser (\(\sin(t), e^{t^2}, \ln t\)), mas \(y, y', y''\) precisam estar no <strong>1º grau</strong> e <strong>separados</strong>!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t3-formula">
             $$\underbrace{a_n(t)y^{(n)} + \dots + a_1(t)y' + a_0(t)y}_{\text{Apenas grau 1 em } y, y', \dots} = g(t)$$
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t3-recipe">
             <div class="recipe-step">
               <span class="step-badge">✔</span>
               <div><strong>É LINEAR:</strong> \(t^3 y'' + \sin(t)y' - e^t y = \cos(t)\). (As funções feias dependem só de \(t\)).</div>
@@ -451,7 +464,7 @@
             Porque nelas vale o <strong>Princípio da Superposição</strong>: se \(y_1\) e \(y_2\) são soluções da homogênea, qualquer combinação \(c_1 y_1 + c_2 y_2\) também é solução!
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t3-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Somando Efeitos de Voo</div>
             Em baixa velocidade, a resistência do ar e a mola do drone são proporcionais a \(y'\) e \(y\) (ex: \(y'' + y = 0\), <strong>Linear</strong>): se sabemos a resposta do drone ao comando \(y_1\) e ao comando \(y_2\), a resposta aos dois juntos é simplesmente a soma \(y_1 + y_2\)! Já em velocidade supersônica, o arrasto vira quadrático (\(y' = y^2\)) ou o ângulo da câmera é grande (\(\sin y\)): a EDO fica <strong>Não-Linear</strong> e somar duas rotas deixa de funcionar.
           </div>
@@ -480,7 +493,7 @@
          TÓPICO 4: VARIÁVEIS SEPARÁVEIS
     ====================================================================== -->
     <section class="topic-card" id="t4">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t4-header">
         <div class="topic-title-wrap">
           <div class="topic-index">4</div>
           <div>
@@ -493,15 +506,15 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t4-intuition">
             <strong>Ideia Central:</strong> Quando \(y'\) pode ser escrito como uma <strong>multiplicação ou divisão</strong> entre uma função só de \(t\) e outra só de \(y\), podemos tratar \(dy\) e \(dt\) como frações e separar os lados!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t4-formula">
             $$\frac{dy}{dt} = \frac{f(t)}{g(y)} \implies \int g(y)\,dy = \int f(t)\,dt + C$$
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t4-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Separe:</strong> Passe tudo que tem \(y\) multiplicando \(dy\) (esquerda) e tudo que tem \(t\) multiplicando \(dt\) (direita).</div>
@@ -523,7 +536,7 @@
             2) Integre: \(\int y\,dy = \int -t\,dt \implies \frac{y^2}{2} = -\frac{t^2}{2} + C_1 \implies t^2 + y^2 = C\) (Círculos!).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t4-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Manobra de Pouso Programada</div>
             Imagine que o computador do drone reduz a altura \(y\) segundo \(\frac{dy}{dt} = -2t \cdot y\) (a velocidade depende do produto entre o tempo \(t\) e a altura \(y\)). Separamos altura na esquerda e tempo na direita: \(\int \frac{1}{y}dy = \int -2t\,dt \implies \ln|y| = -t^2 + C_1 \implies y(t) = C e^{-t^2}\). Se o drone iniciou a descida a \(C = 10\text{ m}\), sua curva exata de pouso é \(y(t) = 10e^{-t^2}\)!
           </div>
@@ -556,7 +569,7 @@
          TÓPICO 5: EQUAÇÕES EXATAS
     ====================================================================== -->
     <section class="topic-card" id="t5">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t5-header">
         <div class="topic-title-wrap">
           <div class="topic-index">5</div>
           <div>
@@ -569,16 +582,16 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t5-intuition">
             <strong>Ideia Central:</strong> Imagine um mapa topográfico de altitude \(\Psi(t,y)\). As soluções de uma EDO Exata são simplesmente as <strong>curvas de nível</strong> \(\Psi(t,y) = C\) onde a altitude permanece constante (\(d\Psi = 0\))!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t5-formula">
             $$\underbrace{M(t,y)}_{\partial \Psi / \partial t}\,dt + \underbrace{N(t,y)}_{\partial \Psi / \partial y}\,dy = 0 \quad \text{é Exata se:} \quad \mathbf{\frac{\partial M}{\partial y} = \frac{\partial N}{\partial t}}$$
             <div class="formula-caption">Dica mnemônica: "Derive cruzado! O que está com \(dt\) deriva em \(y\); o que está com \(dy\) deriva em \(t\)."</div>
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t5-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Teste de Exatidão:</strong> Confirme que \(M_y = N_t\).</div>
@@ -602,7 +615,7 @@
             • Solução: \(t^2y + t + y^2 = C\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t5-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Voando em Curvas de Energia Constante</div>
             O drone possui um sensor de potencial atmosférico \(\Psi(t,y) = t^2y + t + y^2\). Para voar sem gastar energia extra (\(d\Psi = 0\)), a variação de tempo \(dt\) e de altura \(dy\) precisa respeitar \((2ty + 1)dt + (t^2 + 2y)dy = 0\). Como \(\frac{\partial M}{\partial y} = 2t = \frac{\partial N}{\partial t}\), o campo é conservativo (<strong>Exata</strong>) e a trajetória do drone segue exatamente a curva de nível \(\Psi(t,y) = C\)!
           </div>
@@ -630,7 +643,7 @@
          TÓPICO 6: EQUAÇÕES SEMIEXATAS (REDUTÍVEIS A EXATAS)
     ====================================================================== -->
     <section class="topic-card" id="t6">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t6-header">
         <div class="topic-title-wrap">
           <div class="topic-index">6</div>
           <div>
@@ -643,15 +656,15 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t6-intuition">
             <strong>Ideia Central:</strong> Uma equação Semiexata é uma equação Exata que alguém dividiu por um termo, estragando o equilíbrio \(M_y = N_t\). Multiplicando toda a equação pelo <strong>Fator Integrante \(\mu\)</strong>, ela volta a ser Exata!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t6-formula">
             $$\mu \cdot M\,dt + \mu \cdot N\,dy = 0 \implies \frac{\partial(\mu M)}{\partial y} = \frac{\partial(\mu N)}{\partial t}$$
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t6-recipe">
             <div class="recipe-step">
               <span class="step-badge">A</span>
               <div><strong>Tentativa 1 (\(\mu\) só de \(t\)):</strong> Calcule \(\frac{M_y - N_t}{N}\). Se depender <strong>só de \(t\)</strong>, então \(\mu(t) = e^{\int \frac{M_y - N_t}{N} dt}\).</div>
@@ -673,7 +686,7 @@
             Logo \(\mu(y) = e^{\int (1/y)dy} = y\). Multiplicando por \(y\): \(y^2 dt + (2ty - y^2)dy = 0\) agora tem \(\tilde{M}_y = 2y = \tilde{N}_t\)!
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t6-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Calibrando o Sensor com o Fator \(\mu(y)\)</div>
             O altímetro do drone transmitiu a equação da rota dividida por \(y\): \(y\,dt + (2t - y)dy = 0\), parecendo que a energia não se conserva (\(M_y = 1 \neq N_t = 2\)). Aplicando o <strong>fator integrante</strong> ("óculos corretivo") \(\mu(y) = y\), multiplicamos toda a leitura por \(y\), reequilibramos a balança (\(\tilde{M}_y = 2y = \tilde{N}_t\)) e descobrimos a curva de voo conservativa \(\Psi(t,y) = ty^2 - \frac{y^3}{3} = C\)!
           </div>
@@ -702,7 +715,7 @@
          TÓPICO 7: LINEARES DE 1ª ORDEM
     ====================================================================== -->
     <section class="topic-card" id="t7">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t7-header">
         <div class="topic-title-wrap">
           <div class="topic-index">7</div>
           <div>
@@ -715,16 +728,16 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t7-intuition">
             <strong>O Truque Mágico:</strong> Multiplicando \(y' + p(t)y = q(t)\) pelo fator integrante \(\mu(t) = e^{\int p(t)dt}\), o lado esquerdo inteiro colapsa na derivada de um produto: <strong>\((\mu(t) \cdot y)'\)</strong>!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t7-formula">
             $$y' + p(t)y = q(t) \xrightarrow{\times \mu(t) = e^{\int p(t)dt}} \frac{d}{dt}\big[\mu(t)y\big] = \mu(t)q(t)$$
             <div class="formula-caption">Integrando: \(\quad y(t) = \frac{1}{\mu(t)} \left( \int \mu(t)q(t)\,dt + C \right)\)</div>
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t7-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Padronize:</strong> Deixe \(y'\) sozinho (coeficiente 1). Identifique quem multiplica \(y\) como \(p(t)\) (com o sinal!).</div>
@@ -745,7 +758,7 @@
             Logo \((e^{2t}y)' = 4e^{2t} \implies e^{2t}y = 2e^{2t} + C \implies y(t) = 2 + Ce^{-2t}\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t7-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Estabilizando na Altitude de Cruzeiro</div>
             O motor vertical empurra o drone para cima com força \(q(t) = 4\), enquanto o amortecimento atmosférico freia proporcionalmente à altura com \(p(t) = 2\): \(y' + 2y = 4\). Pelo fator integrante \(\mu(t)=e^{2t}\), obtemos \(y(t) = \underbrace{2}_{\text{Cruzeiro}} + \underbrace{Ce^{-2t}}_{\text{Ajuste inicial}}\). Mesmo que o drone comece muito alto ou no chão, o termo transiente \(Ce^{-2t}\) zera rápido e ele crava a altitude de cruzeiro \(y_{\text{eq}} = 2\text{ m}\)!
           </div>
@@ -777,7 +790,7 @@
          TÓPICO 8: BERNOULLI (SUBSTITUIÇÃO)
     ====================================================================== -->
     <section class="topic-card" id="t8">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t8-header">
         <div class="topic-title-wrap">
           <div class="topic-index">8</div>
           <div>
@@ -790,15 +803,15 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t8-intuition">
             <strong>Ideia Central:</strong> A EDO de Bernoulli é não-linear por culpa do termo \(y^n\). Mas fazendo a troca de variável <strong>\(v = y^{1-n}\)</strong>, ela se transforma magicamente numa <strong>EDO Linear de 1ª Ordem</strong> em \(v(t)\)!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t8-formula">
             $$y' + p(t)y = q(t)\,\mathbf{y^n} \xrightarrow{\text{Substitua } \mathbf{v = y^{1-n}}} \frac{1}{1-n}v' + p(t)v = q(t)$$
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t8-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Identifique \(n\):</strong> Veja a potência de \(y^n\) no lado direito (para \(n \neq 0, 1\)).</div>
@@ -821,7 +834,7 @@
             3) Voltando para \(y = \frac{1}{v}\): \(y(t) = \frac{1}{1 + Ce^{-t}}\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t8-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Arrasto Quadrático e Teto Operacional</div>
             Quando o drone sobe rápido (\(y' - y = -y^2\)), o ar rarefeito e a turbulência geram uma perda quadrática \(-y^2\) (\(n=2\)). Trocando a variável altura \(y\) pelo seu inverso \(v = y^{1-2} = \frac{1}{y}\), o computador de bordo resolve uma equação linear simples (\(v' + v = 1\)) e descobre que a altitude \(y(t) = \frac{1}{1+Ce^{-t}}\) satura suavemente no <strong>teto máximo</strong> \(y = 1\text{ km}\)!
           </div>
@@ -853,7 +866,7 @@
          TÓPICO 9: EQUAÇÃO DE SEGUNDA ORDEM
     ====================================================================== -->
     <section class="topic-card" id="t9">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t9-header">
         <div class="topic-title-wrap">
           <div class="topic-index">9</div>
           <div>
@@ -866,15 +879,15 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t9-intuition">
             <strong>Por que 2 condições iniciais?</strong> Pense na Física (\(F = m \cdot y''\)): para prever onde uma bola vai cair, não basta saber de <strong>onde ela partiu</strong> \(y(t_0)\); você precisa saber também com <strong>qual velocidade/inclinação ela foi lançada</strong> \(y'(t_0)\)!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t9-formula">
             $$\begin{cases} a(t)y'' + b(t)y' + c(t)y = g(t) \\ y(t_0) = y_0 \quad \text{(Posição inicial)} \\ y'(t_0) = v_0 \quad \text{(Inclinação inicial)} \end{cases} \implies y(t) = \underbrace{c_1 y_1(t) + c_2 y_2(t)}_{y_h(t)} + y_p(t)$$
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t9-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Conjunto Fundamental (\(y_1, y_2\)):</strong> Toda EDO linear de 2ª ordem tem um espaço de soluções de dimensão 2.</div>
@@ -891,7 +904,7 @@
             Atenção: Aplique as condições iniciais \(y(0)\) e \(y'(0)\) <strong>somente no final</strong>, quando já tiver somado \(y_h + y_p\)!
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t9-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): O Impacto no Trem de Pouso (\(y(0)\) e \(y'(0)\))</div>
             Quando o drone pousa, a Lei de Newton (\(m y'' = \sum F\)) traz a <strong>aceleração \(y''\)</strong> da suspensão. Para prever se a barriga do drone vai raspar no chão, não basta saber a compressão inicial da mola \(y(0)\); precisamos também da <strong>velocidade vertical do impacto \(y'(0)\)</strong>! Juntas, essas 2 condições iniciais determinam \(c_1\) e \(c_2\) na solução geral \(y(t) = c_1 y_1(t) + c_2 y_2(t) + y_p(t)\).
           </div>
@@ -923,7 +936,7 @@
          TÓPICO 10: HOMOGÊNEAS COM COEFICIENTES CONSTANTES
     ====================================================================== -->
     <section class="topic-card" id="t10">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t10-header">
         <div class="topic-title-wrap">
           <div class="topic-index">10</div>
           <div>
@@ -936,11 +949,11 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t10-intuition">
             <strong>Ideia Central:</strong> Como a derivada de \(e^{rt}\) é apenas \(r \cdot e^{rt}\), substituir \(y = e^{rt}\) em \(ay'' + by' + cy = 0\) transforma a EDO na <strong>Equação Característica</strong> \(ar^2 + br + c = 0\). Basta olhar o \(\Delta = b^2 - 4ac\)!
           </div>
 
-          <table class="mini-table">
+          <table class="mini-table" data-audio="t10-recipe">
             <thead>
               <tr>
                 <th>Sinal de \(\Delta\)</th>
@@ -974,7 +987,7 @@
             • \(y'' + 2y' + 5y = 0 \to r = -1 \pm 2i \implies y_h = e^{-t}(c_1\cos 2t + c_2\sin 2t)\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t10-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Escolhendo o Amortecedor do Pouso pelo \(\Delta\)</div>
             Na suspensão livre do drone (\(ay'' + by' + cy = 0\)), o sinal de \(\Delta = b^2 - 4ac\) diz como o drone se comporta ao tocar o solo:<br/>
             • <strong>\(\Delta > 0\) (Óleo pesado):</strong> Desce lento e duro sem quicar (\(c_1 e^{r_1 t} + c_2 e^{r_2 t}\)).<br/>
@@ -1006,7 +1019,7 @@
          TÓPICO 11: COEFICIENTES INDETERMINADOS
     ====================================================================== -->
     <section class="topic-card" id="t11">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t11-header">
         <div class="topic-title-wrap">
           <div class="topic-index">11</div>
           <div>
@@ -1019,7 +1032,7 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t11-intuition">
             <strong>Quando funciona?</strong> Quando os coeficientes são constantes e \(g(t)\) é formado por funções cujas derivadas se repetem: <strong>Polinômios, Exponenciais \(e^{\alpha t}\) ou Senos/Cossenos</strong>!
           </div>
 
@@ -1046,7 +1059,7 @@
             </tbody>
           </table>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t11-recipe">
             <div class="recipe-step">
               <span class="step-badge">!</span>
               <div><strong>Regra Anti-Colisão (Ressonância):</strong> Se o seu chute para \(y_p\) já aparece dentro da homogênea \(y_h\), multiplique o chute por <strong>\(t\)</strong> (ou \(t^2\)) até parar de repetir!</div>
@@ -1059,7 +1072,7 @@
             Chutar \(y_p = Ae^t\) daria zero! Como \(e^t\) já está em \(y_h\), chutamos \(\mathbf{y_p = A \cdot t \cdot e^t}\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t11-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Vibração da Hélice e Perigo de Ressonância</div>
             A rotação das hélices aplica uma força periódica \(g(t) = \cos(\omega t)\) na estrutura do drone. Como \(\cos(\omega t)\) tem derivadas previsíveis, chutamos \(y_p = A\cos(\omega t) + B\sin(\omega t)\) para descobrir o quanto o chassi vai vibrar. Porém, se a hélice girar exatamente na frequência natural da mola (\(\omega = \omega_0\), <strong>Colisão!</strong>), a resposta ganha um \(t\) multiplicando (\(y_p = t\sin\omega_0 t\)) e a vibração cresce até quebrar o suporte da câmera!
           </div>
@@ -1088,7 +1101,7 @@
          TÓPICO 12: VARIAÇÃO DE PARÂMETROS
     ====================================================================== -->
     <section class="topic-card" id="t12">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t12-header">
         <div class="topic-title-wrap">
           <div class="topic-index">12</div>
           <div>
@@ -1101,17 +1114,17 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t12-intuition">
             <strong>Ideia Central:</strong> Pegue a solução homogênea \(y_h = c_1 y_1(t) + c_2 y_2(t)\) e promova as constantes \(c_1, c_2\) a <strong>funções variáveis \(u_1(t)\) e \(u_2(t)\)</strong>!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t12-formula">
             $$y_p(t) = u_1(t)y_1(t) + u_2(t)y_2(t) \quad \text{onde:}$$
             $$u_1(t) = -\int \frac{y_2(t)\,g(t)}{a \cdot W(y_1, y_2)}\,dt \qquad \text{e} \qquad u_2(t) = \int \frac{y_1(t)\,g(t)}{a \cdot W(y_1, y_2)}\,dt$$
             <div class="formula-caption">Lembrete: divida a EDO por \(a\) primeiro para deixar \(y'' + py' + qy = g(t)\).</div>
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t12-recipe">
             <div class="recipe-step">
               <span class="step-badge">1</span>
               <div><strong>Ache \(y_1(t)\) e \(y_2(t)\):</strong> Resolva a homogênea e calcule o Wronskiano \(W = y_1 y_2' - y_1' y_2\).</div>
@@ -1134,7 +1147,7 @@
             • \(y_p(t) = \cos(t)\ln|\cos t| + t\sin(t)\).
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t12-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Rajada Exótica de Vento \(g(t) = \sec(t)\)</div>
             E se o drone atravessar uma turbulência severa modelada por \(g(t) = \sec(t)\) em \(y'' + y = \sec(t)\)? Não existe "chute" tabelado para \(\sec(t)\)! O computador do drone usa <strong>Variação de Parâmetros</strong>: toma os modos naturais \(y_1 = \cos t\) e \(y_2 = \sin t\) (\(W = 1\)) e calcula em tempo real os pesos móveis \(u_1(t) = \ln|\cos t|\) e \(u_2(t) = t\) para compensar a rajada.
           </div>
@@ -1162,7 +1175,7 @@
          TÓPICO 13: MODELAGEM: SISTEMA MASSA-MOLA E CIRCUITO RLC
     ====================================================================== -->
     <section class="topic-card" id="t13">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t13-header">
         <div class="topic-title-wrap">
           <div class="topic-index">13</div>
           <div>
@@ -1175,16 +1188,16 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t13-intuition">
             <strong>A Grande Analogia:</strong> A 2ª Lei de Newton num sistema Massa-Mola-Amortecedor e a Lei das Malhas de Kirchhoff num Circuito RLC produzem <strong>a mesmíssima equação diferencial</strong>!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t13-formula">
             $$\textbf{Massa-Mola:} \quad m\,x'' + \gamma\,x' + k\,x = F(t)$$
             $$\textbf{Circuito RLC:} \quad L\,q'' + R\,q' + \frac{1}{C}\,q = E(t)$$
           </div>
 
-          <table class="mini-table">
+          <table class="mini-table" data-audio="t13-recipe">
             <thead>
               <tr>
                 <th>Papel Físico na EDO</th>
@@ -1218,7 +1231,7 @@
             • <strong>Superamortecido (\(\Delta > 0\)):</strong> Volta ao equilíbrio devagar, sem oscilar.
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t13-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Suspensão da Câmera ⇄ Placa Eletrônica RLC</div>
             Antes de fabricar a suspensão mecânica da câmera do drone (\(m x'' + \gamma x' + k x = F(t)\)), os engenheiros simulam tudo na placa eletrônica montando um <strong>circuito RLC</strong> (\(L q'' + R q' + \frac{1}{C}q = E(t)\))! Trocar o óleo do amortecedor (\(\gamma\)) no trem de pouso tem exatamente o mesmo efeito matemático que girar um potenciômetro para mudar a resistência (\(R\)) no circuito do drone.
           </div>
@@ -1250,7 +1263,7 @@
          TÓPICO 14: CRESCIMENTO E DECAIMENTO dP/dt = kP
     ====================================================================== -->
     <section class="topic-card" id="t14">
-      <div class="topic-header">
+      <div class="topic-header" data-audio="t14-header">
         <div class="topic-title-wrap">
           <div class="topic-index">14</div>
           <div>
@@ -1263,15 +1276,15 @@
 
       <div class="topic-body">
         <div class="concept-col">
-          <div class="intuition-box">
+          <div class="intuition-box" data-audio="t14-intuition">
             <strong>Ideia Central:</strong> Quando a velocidade de variação \(\frac{dP}{dt}\) é diretamente proporcional ao tamanho atual \(P\) (ex: bactérias se dividindo, juros compostos ou átomos radioativos decaindo), a solução é sempre uma <strong>exponencial</strong>!
           </div>
 
-          <div class="formula-showcase">
+          <div class="formula-showcase" data-audio="t14-formula">
             $$\frac{dP}{dt} = kP \quad \xrightarrow{\text{Separando Variáveis}} \quad \mathbf{P(t) = P_0 \, e^{kt}}$$
           </div>
 
-          <div class="recipe-steps">
+          <div class="recipe-steps" data-audio="t14-recipe">
             <div class="recipe-step">
               <span class="step-badge">+</span>
               <div><strong>Crescimento (\(k > 0\)):</strong> Populações, colônias de bactérias e juros contínuos. Tempo de Duplicação: \(T_{\text{dup}} = \frac{\ln 2}{k}\).</div>
@@ -1289,7 +1302,7 @@
             3) Com \(k\) em mãos, calcule \(P(t)\) para qualquer tempo pedido!
           </div>
 
-          <div class="case-application">
+          <div class="case-application" data-audio="t14-drone">
             <div class="case-application-title">🚁 No Caso Central (O Drone): Descarga da Bateria (\(k &lt; 0\)) e Enxame (\(k &gt; 0\))</div>
             A bateria reserva do drone descarrega proporcionalmente à carga restante \(P(t)\): \(\frac{dP}{dt} = kP \implies P(t) = P_0 e^{kt}\). Se ela parte de \(P_0 = 100\%\) e cai para \(50\%\) em \(2\text{ horas}\) (<strong>Meia-Vida</strong> \(T_{1/2} = 2\text{h}\)), então \(k = -\frac{\ln 2}{2} \approx -0{,}35\text{ h}^{-1}\). Já se o drone transmite um alerta em rede para outros drones (\(\frac{dP}{dt} = +0{,}35P\)), o número de drones conectados <strong>dobra</strong> a cada \(T_{\text{dup}} = \frac{\ln 2}{0{,}35} \approx 1{,}98\text{s}\)!
           </div>
@@ -1330,6 +1343,13 @@
         </div>
       </div>
       <div class="tts-dock-controls">
+        <select id="ttsDockSpeedSelect" class="tts-dock-speed" title="Velocidade da reprodução">
+          <option value="0.75">0.75x</option>
+          <option value="1.0" selected>1.0x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2.0">2.0x</option>
+        </select>
         <div class="tts-equalizer" id="ttsEqualizer" aria-label="Reproduzindo áudio" aria-hidden="true">
           <span class="eq-bar"></span>
           <span class="eq-bar"></span>

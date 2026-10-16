@@ -1,0 +1,358 @@
+{
+  "voice": "pt-BR-ThalitaMultilingualNeural",
+  "count": 88,
+  "items": {
+    "hero": {
+      "text": "Introdução às Equações Diferenciais Ordinárias (I E D O ). Uma E D O não é um monstro algébrico: é apenas uma regra que diz para onde uma curva está apontando em cada instante. Explore os 14 tópicos abaixo com receitas curtas e laboratórios visuais interativos.",
+      "file": "audio/hero.mp3"
+    },
+    "intro-lead": {
+      "text": "No mundo real, quase tudo está mudando o tempo todo: a temperatura de um café esfriando, a velocidade de um carro freando ou o saldo de uma conta rendendo juros. A Equação Diferencial Ordinária ( E D O ) é a ferramenta matemática criada para prever o futuro de qualquer coisa que muda no tempo .",
+      "file": "audio/intro-lead.mp3"
+    },
+    "intro-compare-1": {
+      "text": "Equação Comum (Álgebra) = Uma Foto Exemplo: 2x + 3 = 11 implica que x = 4 . A incógnita x é apenas um número parado . Serve para problemas estáticos (como medir um terreno fixo).",
+      "file": "audio/intro-compare-1.mp3"
+    },
+    "intro-compare-2": {
+      "text": "Equação Diferencial ( E D O ) = Um Filme Inteiro Exemplo: derivada de y sobre d t = 2y implica que y(t) = C e elevado a 2t . Relaciona uma quantidade y(t) com sua velocidade de mudança ( derivada de y sobre d t ). A resposta não é um número, e sim a curva inteira y(t) que conta toda a história no tempo!",
+      "file": "audio/intro-compare-2.mp3"
+    },
+    "intro-compare-3": {
+      "text": "Por que tem esse nome? Equação: Tem sinal de = e uma incógnita y(t) . Diferencial: Contém derivadas ( y linha , y duas linhas ), que medem taxas de variação. Ordinária: Depende de uma só variável (geralmente o tempo t ).",
+      "file": "audio/intro-compare-3.mp3"
+    },
+    "intro-use-1": {
+      "text": "Física e Engenharia A 2ª Lei de Newton ( F = m vezes y duas linhas ) é uma E D O ! Usada para projetar suspensões de carros, órbitas de satélites, pontes, aviões e circuitos elétricos ( R L C ).",
+      "file": "audio/intro-use-1.mp3"
+    },
+    "intro-use-2": {
+      "text": "Biologia e Medicina Prever o crescimento de colônias de bactérias, o avanço de epidemias e a velocidade com que um remédio é absorvido e eliminado da corrente sanguínea.",
+      "file": "audio/intro-use-2.mp3"
+    },
+    "intro-use-3": {
+      "text": "Clima, Química e Energia Calcular em quanto tempo um reator ou xícara de café esfria (Lei de Resfriamento de Newton), velocidade de reações químicas e meia-vida do Carbono-14.",
+      "file": "audio/intro-use-3.mp3"
+    },
+    "intro-use-4": {
+      "text": "Economia e Finanças Modelar juros compostos contínuos ( dS sobre dt = rS ), evolução de dívidas com aportes mensais e precificação de opções no mercado financeiro.",
+      "file": "audio/intro-use-4.mp3"
+    },
+    "central-lead": {
+      "text": "Para que nenhuma fórmula pareça abstrata, vamos acompanhar um único sistema real do início ao fim : você é o engenheiro responsável por programar o voo, o pouso e a bateria de um Drone Autônomo ao longo do tempo t (em segundos). Veja o que cada variável representa na prática:",
+      "file": "audio/central-lead.mp3"
+    },
+    "central-item-1": {
+      "text": "1. Altitude de Voo y(t) (Tópicos 1 a 8) y(t) é a altura do drone (em metros) e y linha = derivada de y sobre d t é a velocidade vertical (m/s) ditada pelos motores, vento e sensores de altitude.",
+      "file": "audio/central-item-1.mp3"
+    },
+    "central-item-2": {
+      "text": "2. Suspensão de Pouso y duas linhas (Tópicos 9 a 12) No impacto do pouso entra a aceleração y duas linhas ( F = m y duas linhas ): a mola e o amortecedor do trem de pouso absorvem choques e vibrações das hélices g(t) .",
+      "file": "audio/central-item-2.mp3"
+    },
+    "central-item-3": {
+      "text": "3. Mola Mecânica Placa R L C (Tópico 13) A suspensão mecânica da câmera ( m, , k ) obedece exatamente à mesma E D O do filtro eletrônico R L C ( L, R, 1/C ) da placa-mãe do drone.",
+      "file": "audio/central-item-3.mp3"
+    },
+    "central-item-4": {
+      "text": "4. Bateria / Gerador P(t) (Tópico 14) A carga energética P(t) descarrega (ou um enxame de drones cresce) a uma taxa proporcional à quantidade atual: derivada de P sobre d t = kP .",
+      "file": "audio/central-item-4.mp3"
+    },
+    "compass-item-1": {
+      "text": "y linha = f(t) vezes g(y) para Variáveis Separáveis Jogue y para a esquerda, t para a direita e integre.",
+      "file": "audio/compass-item-1.mp3"
+    },
+    "compass-item-2": {
+      "text": "y linha + p(t)y = q(t) para Linear de 1ª Ordem Multiplique pelo Fator Integrante mi (t) = e ( p dt).",
+      "file": "audio/compass-item-2.mp3"
+    },
+    "compass-item-3": {
+      "text": "y linha + p(t)y = q(t)y elevado a n para Bernoulli Substitua v = y (1-n) para transformá-la em Linear.",
+      "file": "audio/compass-item-3.mp3"
+    },
+    "compass-item-4": {
+      "text": "M(t,y)dt + N(t,y)dy = 0 para Exata ou Semiexata Teste derivada parcial de M em relação a y = derivada parcial de N em relação a t . Se falhar, ache mi (t) ou mi (y).",
+      "file": "audio/compass-item-4.mp3"
+    },
+    "compass-item-5": {
+      "text": "a y duas linhas + b y linha + cy = 0 para Homogênea 2ª Ordem Báskara em ar ao quadrado + br + c = 0. Olhe o sinal de delta !",
+      "file": "audio/compass-item-5.mp3"
+    },
+    "compass-item-6": {
+      "text": "a y duas linhas + b y linha + cy = g(t) para Indeterminados / Variação g(t) simples? Chute y particular . g(t) exótico (tan, sec)? Wronskiano!",
+      "file": "audio/compass-item-6.mp3"
+    },
+    "t1-header": {
+      "text": "Tópico 1: derivada de y sobre d t - É a Taxa de Variação. O coração de toda E D O : a derivada diz a inclinação da curva em cada ponto",
+      "file": "audio/t1-header.mp3"
+    },
+    "t1-intuition": {
+      "text": "Ideia Central: Enquanto uma equação comum pede um número x , uma E D O pede uma função inteira y(t) cuja velocidade de mudança derivada de y sobre d t obedece a uma lei conhecida.",
+      "file": "audio/t1-intuition.mp3"
+    },
+    "t1-formula": {
+      "text": "derivada de y sobre d t = f(t, y) Lê-se: \"A inclinação de y no instante t vale f(t,y) \"",
+      "file": "audio/t1-formula.mp3"
+    },
+    "t1-recipe": {
+      "text": "Se derivada de y sobre d t 0 : A função y(t) está subindo (crescendo) naquele instante. = Se derivada de y sobre d t = 0 : A função está estacionária (ponto de equilíbrio / reta horizontal). Se derivada de y sobre d t A função y(t) está descendo (decaindo) naquele instante. Visão Geométrica (Campo de Direções) Desenhando pequenas setas com inclinação f(t,y) em vários pontos do plano, vemos a \"correnteza de um rio\". Resolver a E D O é soltar um barquinho e desenhar a trajetória que segue as setas!",
+      "file": "audio/t1-recipe.mp3"
+    },
+    "t1-drone": {
+      "text": "No Caso Central (O Drone): O que é derivada de y sobre d t ?",
+      "file": "audio/t1-drone.mp3"
+    },
+    "t2-header": {
+      "text": "Tópico 2: Teorema de Existência e Unicidade ( T E U ). Quando um Problema de Valor Inicial ( P V I ) tem solução garantida e única?",
+      "file": "audio/t2-header.mp3"
+    },
+    "t2-intuition": {
+      "text": "Ideia Central: Antes de gastar papel tentando resolver y linha = f(t,y) com ponto inicial y(t_0)= y de zero , o T E U garante se existe uma curva passando por (t_0, y de zero ) e se duas curvas distintas jamais se cruzam .",
+      "file": "audio/t2-intuition.mp3"
+    },
+    "t2-formula": {
+      "text": "y linha = f(t,y) y(t_0) = y de zero implica que l 1. f(t,y) contínua Existe solução 2. f y contínua Solução é ÚNICA Ambas precisam ser contínuas num retângulo aberto ao redor de (t_0, y de zero ) .",
+      "file": "audio/t2-formula.mp3"
+    },
+    "t2-recipe": {
+      "text": "1 Ache onde f(t,y) explode: Divisão por zero, raiz par de negativo ou logaritmo natural ( 0) . Fora daí, existe solução. 2 Derive em relação a y ( f / y ): Veja se surge nova divisão por zero (ex: expoente fracionário y 2/3 2 sobre 3 y -1/3 ). Exemplo Clássico de Quebra de Unicidade Em y linha = 3y 2/3 com y de zero =0 : f é contínua, mas f y = 2 y 1/3 explode em y=0 ! Resultado: duas soluções passam pela origem: y_1(t) = 0 e y_2(t) = t ao cubo .",
+      "file": "audio/t2-recipe.mp3"
+    },
+    "t2-drone": {
+      "text": "No Caso Central (O Drone): Rota Previsível vs. Pane no Piloto",
+      "file": "audio/t2-drone.mp3"
+    },
+    "t3-header": {
+      "text": "Tópico 3: Linearidade. Como distinguir E D Ós Lineares das Não-Lineares em 2 segundos",
+      "file": "audio/t3-header.mp3"
+    },
+    "t3-intuition": {
+      "text": "Regra de Ouro: Olhe apenas para a variável dependente y e suas derivadas ( y linha , y duas linhas ) . A variável t pode fazer a loucura que quiser ( seno (t), e elevado a t ao quadrado , logaritmo natural t ), mas y, y linha , y duas linhas precisam estar no 1º grau e separados !",
+      "file": "audio/t3-intuition.mp3"
+    },
+    "t3-formula": {
+      "text": "a_n(t)y (n) + + a_1(t) y linha + a_0(t)y _ Apenas grau 1 em y, y linha , = g(t)",
+      "file": "audio/t3-formula.mp3"
+    },
+    "t3-recipe": {
+      "text": "É LINEAR: t ao cubo y duas linhas + seno (t) y linha - e elevado a t y = cosseno (t) . (As funções feias dependem só de t ). PROIBIDO em Lineares: Potências y ao quadrado , ( y linha ) ao cubo , produtos cruzados y vezes y linha , ou funções dentro de y como seno (y), e elevado a y , 1 sobre y . Por que amamos E D Ós Lineares? Porque nelas vale o Princípio da Superposição : se y_1 e y_2 são soluções da homogênea, qualquer combinação c_1 y_1 + c_2 y_2 também é solução!",
+      "file": "audio/t3-recipe.mp3"
+    },
+    "t3-drone": {
+      "text": "No Caso Central (O Drone): Somando Efeitos de Voo",
+      "file": "audio/t3-drone.mp3"
+    },
+    "t4-header": {
+      "text": "Tópico 4: Variáveis Separáveis. Cada um no seu quadrado: y de um lado, t do outro",
+      "file": "audio/t4-header.mp3"
+    },
+    "t4-intuition": {
+      "text": "Ideia Central: Quando y linha pode ser escrito como uma multiplicação ou divisão entre uma função só de t e outra só de y , podemos tratar dy e dt como frações e separar os lados!",
+      "file": "audio/t4-intuition.mp3"
+    },
+    "t4-formula": {
+      "text": "derivada de y sobre d t = f(t) g(y) implica que integral g(y) ,dy = integral f(t) ,dt + C",
+      "file": "audio/t4-formula.mp3"
+    },
+    "t4-recipe": {
+      "text": "1 Separe: Passe tudo que tem y multiplicando dy (esquerda) e tudo que tem t multiplicando dt (direita). 2 Integre ambos os lados: Adicione a constante +C em apenas um dos lados (geralmente no lado do t ). 3 Isole y(t) : Se possível, deixe y explícito em função de t . Exemplo Resolvido Relâmpago Resolva derivada de y sobre d t = - t sobre y : 1) Separe: y ,dy = -t ,dt 2) Integre: integral y ,dy = integral -t ,dt implica que y ao quadrado 2 = - t ao quadrado 2 + C_1 implica que t ao quadrado + y ao quadrado = C (Círculos!).",
+      "file": "audio/t4-recipe.mp3"
+    },
+    "t4-drone": {
+      "text": "No Caso Central (O Drone): Manobra de Pouso Programada",
+      "file": "audio/t4-drone.mp3"
+    },
+    "t5-header": {
+      "text": "Tópico 5: Equações Exatas. A E D O é a derivada total de uma função potencial psi (t,y) = C",
+      "file": "audio/t5-header.mp3"
+    },
+    "t5-intuition": {
+      "text": "Ideia Central: Imagine um mapa topográfico de altitude psi (t,y) . As soluções de uma E D O Exata são simplesmente as curvas de nível psi (t,y) = C onde a altitude permanece constante ( d psi = 0 )!",
+      "file": "audio/t5-intuition.mp3"
+    },
+    "t5-formula": {
+      "text": "M(t,y) _ psi / t ,dt + N(t,y) _ psi / y ,dy = 0 é Exata se: derivada parcial de M em relação a y = derivada parcial de N em relação a t Dica mnemônica: \"Derive cruzado! O que está com dt deriva em y ; o que está com dy deriva em t .\"",
+      "file": "audio/t5-formula.mp3"
+    },
+    "t5-recipe": {
+      "text": "1 Teste de Exatidão: Confirme que derivada parcial de M em relação a y = derivada parcial de N em relação a t . 2 Integre M em t : psi (t,y) = integral M(t,y) ,dt + h(y) (como y é fixo, a \"constante\" é uma função h(y) !). 3 Descubra h(y) : Derive psi em relação a y e iguale a N(t,y) . Finalize com psi (t,y) = C . Exemplo Relâmpago (2ty + 1)dt + (t ao quadrado + 2y)dy = 0 : derivada parcial de M em relação a y = 2t e derivada parcial de N em relação a t = 2t (Exata! ) psi = integral (2ty+1)dt = t ao quadrado y + t + h(y) . psi _y = t ao quadrado + h'(y) = t ao quadrado + 2y implica que h(y) = y ao quadrado . Solução: t ao quadrado y + t + y ao quadrado = C .",
+      "file": "audio/t5-recipe.mp3"
+    },
+    "t5-drone": {
+      "text": "No Caso Central (O Drone): Voando em Curvas de Energia Constante",
+      "file": "audio/t5-drone.mp3"
+    },
+    "t6-header": {
+      "text": "Tópico 6: Semiexata (Fator Integrante mi ). Quando derivada parcial de M em relação a y diferente de derivada parcial de N em relação a t , multiplicamos a E D O por um \"óculos corretivo\" mi",
+      "file": "audio/t6-header.mp3"
+    },
+    "t6-intuition": {
+      "text": "Ideia Central: Uma equação Semiexata é uma equação Exata que alguém dividiu por um termo, estragando o equilíbrio derivada parcial de M em relação a y = derivada parcial de N em relação a t . Multiplicando toda a equação pelo Fator Integrante mi , ela volta a ser Exata!",
+      "file": "audio/t6-intuition.mp3"
+    },
+    "t6-formula": {
+      "text": "mi vezes M ,dt + mi vezes N ,dy = 0 implica que ( mi M) y = ( mi N) t",
+      "file": "audio/t6-formula.mp3"
+    },
+    "t6-recipe": {
+      "text": "A Tentativa 1 ( mi só de t ): Calcule derivada parcial de M em relação a y - derivada parcial de N em relação a t N . Se depender só de t , então mi (t) = e elevado a integral derivada parcial de M em relação a y - derivada parcial de N em relação a t N dt . B Tentativa 2 ( mi só de y ): Calcule derivada parcial de N em relação a t - derivada parcial de M em relação a y M . Se depender só de y , então mi (y) = e elevado a integral derivada parcial de N em relação a t - derivada parcial de M em relação a y M dy . 3 Multiplique e Resolva: Multiplique a E D O original por mi e resolva normalmente como Exata! Exemplo Relâmpago y ,dt + (2t - y) ,dy = 0 implica que derivada parcial de M em relação a y = 1 diferente de derivada parcial de N em relação a t = 2 . Testando derivada parcial de N em relação a t - derivada parcial de M em relação a y M = 2 - 1 y = 1 sobre y (só depende de y !). Logo mi (y) = e elevado a integral (1/y)dy = y . Multiplicando por y : y ao quadrado dt + (2ty - y ao quadrado )dy = 0 agora tem M _y = 2y = N _t !",
+      "file": "audio/t6-recipe.mp3"
+    },
+    "t6-drone": {
+      "text": "No Caso Central (O Drone): Calibrando o Sensor com o Fator mi (y)",
+      "file": "audio/t6-drone.mp3"
+    },
+    "t7-header": {
+      "text": "Tópico 7: Lineares de 1ª Ordem. O método mais importante de 1ª ordem: Regra do Produto ao contrário!",
+      "file": "audio/t7-header.mp3"
+    },
+    "t7-intuition": {
+      "text": "O Truque Mágico: Multiplicando y linha + p(t)y = q(t) pelo fator integrante mi (t) = e elevado a integral p(t)dt , o lado esquerdo inteiro colapsa na derivada de um produto: ( mi (t) vezes y)' !",
+      "file": "audio/t7-intuition.mp3"
+    },
+    "t7-formula": {
+      "text": "y linha + p(t)y = q(t) mi (t) = e elevado a integral p(t)dt d sobre dt mi (t)y = mi (t)q(t) Integrando: y(t) = 1 mi (t) ( integral mi (t)q(t) ,dt + C )",
+      "file": "audio/t7-formula.mp3"
+    },
+    "t7-recipe": {
+      "text": "1 Padronize: Deixe y linha sozinho (coeficiente 1). Identifique quem multiplica y como p(t) (com o sinal!). 2 Ache o Fator Integrante: mi (t) = e elevado a integral p(t) ,dt . 3 Colapse e Integre: Escreva mi (t)y = integral mi (t)q(t) ,dt + C e passe mi (t) dividindo. Exemplo Relâmpago y linha + 2y = 4 : Aqui p(t) = 2 implica que mi (t) = e elevado a integral 2dt = e elevado a 2t . Logo ( e elevado a 2t y)' = 4 e elevado a 2t implica que e elevado a 2t y = 2 e elevado a 2t + C implica que y(t) = 2 + C e elevado a -2t .",
+      "file": "audio/t7-recipe.mp3"
+    },
+    "t7-drone": {
+      "text": "No Caso Central (O Drone): Estabilizando na Altitude de Cruzeiro",
+      "file": "audio/t7-drone.mp3"
+    },
+    "t8-header": {
+      "text": "Tópico 8: Bernoulli (Substituição). Quase linear, mas tem um y elevado a n atrapalhando no lado direito!",
+      "file": "audio/t8-header.mp3"
+    },
+    "t8-intuition": {
+      "text": "Ideia Central: A E D O de Bernoulli é não-linear por culpa do termo y elevado a n . Mas fazendo a troca de variável v = y 1-n , ela se transforma magicamente numa E D O Linear de 1ª Ordem em v(t) !",
+      "file": "audio/t8-intuition.mp3"
+    },
+    "t8-formula": {
+      "text": "y linha + p(t)y = q(t) , y elevado a n Substitua v = y 1-n 1 1-n v' + p(t)v = q(t)",
+      "file": "audio/t8-formula.mp3"
+    },
+    "t8-recipe": {
+      "text": "1 Identifique n : Veja a potência de y elevado a n no lado direito (para n diferente de 0, 1 ). 2 Faça a Substituição: Defina v = y 1-n . Pela Regra da Cadeia, v' = (1-n)y -n y linha . 3 Resolva a Linear em v e Desfaça: Ache v(t) por Fator Integrante e volte para y = v 1 1-n . Exemplo Relâmpago (Equação Logística) y linha - y = -y ao quadrado tem n = 2 . 1) Substitua v = y 1-2 = y -1 = 1 sobre y . 2) A E D O em v vira linear: v' + v = 1 implica que v(t) = 1 + C e elevado a -t . 3) Voltando para y = 1 sobre v : y(t) = 1 1 + C e elevado a -t .",
+      "file": "audio/t8-recipe.mp3"
+    },
+    "t8-drone": {
+      "text": "No Caso Central (O Drone): Arrasto Quadrático e Teto Operacional",
+      "file": "audio/t8-drone.mp3"
+    },
+    "t9-header": {
+      "text": "Tópico 9: Equação de Segunda Ordem. Apareceu y duas linhas (aceleração): agora precisamos de 2 condições iniciais e 2 soluções independentes",
+      "file": "audio/t9-header.mp3"
+    },
+    "t9-intuition": {
+      "text": "Por que 2 condições iniciais? Pense na Física ( F = m vezes y duas linhas ): para prever onde uma bola vai cair, não basta saber de onde ela partiu y(t_0) ; você precisa saber também com qual velocidade/inclinação ela foi lançada y linha (t_0) !",
+      "file": "audio/t9-intuition.mp3"
+    },
+    "t9-formula": {
+      "text": "a(t) y duas linhas + b(t) y linha + c(t)y = g(t) y(t_0) = y de zero (Posição inicial) y linha (t_0) = v_0 (Inclinação inicial) implica que y(t) = c_1 y_1(t) + c_2 y_2(t) _ y homogênea (t) + y particular (t)",
+      "file": "audio/t9-formula.mp3"
+    },
+    "t9-recipe": {
+      "text": "1 Conjunto Fundamental ( y_1, y_2 ): Toda E D O linear de 2ª ordem tem um espaço de soluções de dimensão 2. 2 Teste do Wronskiano ( W diferente de 0 ): y_1 e y_2 são Linearmente Independentes (LI) se Wronskiano de y1 e y2 = smallmatrix y_1 y_2 y_1' y_2' smallmatrix = y_1 y_2' - y_1' y_2 diferente de 0 . Estrutura Geral da Solução Solução Geral = Homogênea ( y homogênea ) + Particular ( y particular ) . Atenção: Aplique as condições iniciais y de zero e y linha (0) somente no final , quando já tiver somado y homogênea + y particular !",
+      "file": "audio/t9-recipe.mp3"
+    },
+    "t9-drone": {
+      "text": "No Caso Central (O Drone): O Impacto no Trem de Pouso ( y de zero e y linha (0) )",
+      "file": "audio/t9-drone.mp3"
+    },
+    "t10-header": {
+      "text": "Tópico 10: Homogêneas com Coeficientes Constantes. Transforme derivadas em polinômio de 2º grau (Bhaskara) chutando y = e elevado a rt",
+      "file": "audio/t10-header.mp3"
+    },
+    "t10-intuition": {
+      "text": "Ideia Central: Como a derivada de e elevado a rt é apenas r vezes e elevado a rt , substituir y = e elevado a rt em a y duas linhas + b y linha + cy = 0 transforma a E D O na Equação Característica ar ao quadrado + br + c = 0 . Basta olhar o delta = b ao quadrado - 4ac !",
+      "file": "audio/t10-intuition.mp3"
+    },
+    "t10-recipe": {
+      "text": "Sinal de delta Raízes r_1, r_2 Solução Homogênea y homogênea (t) delta 0 Reais distintas r_1 diferente de r_2 c_1 e elevado a r_1 t + c_2 e elevado a r_2 t (Sem oscilação) delta = 0 Raiz real dupla r_1 = r_2 = r c_1 e elevado a rt + c_2 , t , e elevado a rt (Ganha um t !) delta Complexas r = mais ou menos i e elevado a t (c_1 cosseno ( t) + c_2 seno ( t) )",
+      "file": "audio/t10-recipe.mp3"
+    },
+    "t10-drone": {
+      "text": "No Caso Central (O Drone): Escolhendo o Amortecedor do Pouso pelo delta",
+      "file": "audio/t10-drone.mp3"
+    },
+    "t11-header": {
+      "text": "Tópico 11: Coeficientes Indeterminados. O método do \"Chute Inteligente\" para encontrar a solução particular y particular (t)",
+      "file": "audio/t11-header.mp3"
+    },
+    "t11-intuition": {
+      "text": "Quando funciona? Quando os coeficientes são constantes e g(t) é formado por funções cujas derivadas se repetem: Polinômios, Exponenciais e elevado a t ou Senos/Cossenos !",
+      "file": "audio/t11-intuition.mp3"
+    },
+    "t11-recipe": {
+      "text": "! Regra Anti-Colisão (Ressonância): Se o seu chute para y particular já aparece dentro da homogênea y homogênea , multiplique o chute por t (ou t ao quadrado ) até parar de repetir! Exemplo de Colisão Em y duas linhas - y = e elevado a t , temos y homogênea = c_1 e elevado a t + c_2 e elevado a -t . Chutar y particular = A e elevado a t daria zero! Como e elevado a t já está em y homogênea , chutamos y particular = A vezes t vezes e elevado a t .",
+      "file": "audio/t11-recipe.mp3"
+    },
+    "t11-drone": {
+      "text": "No Caso Central (O Drone): Vibração da Hélice e Perigo de Ressonância",
+      "file": "audio/t11-drone.mp3"
+    },
+    "t12-header": {
+      "text": "Tópico 12: Variação de Parâmetros. O \"Canivete Suíço\" universal: resolve qualquer g(t) , inclusive tangente (t), secante (t), e elevado a t t !",
+      "file": "audio/t12-header.mp3"
+    },
+    "t12-intuition": {
+      "text": "Ideia Central: Pegue a solução homogênea y homogênea = c_1 y_1(t) + c_2 y_2(t) e promova as constantes c_1, c_2 a funções variáveis u_1(t) e u_2(t) !",
+      "file": "audio/t12-intuition.mp3"
+    },
+    "t12-formula": {
+      "text": "y particular (t) = u_1(t)y_1(t) + u_2(t)y_2(t) onde: u_1(t) = - integral y_2(t) ,g(t) a vezes Wronskiano de y1 e y2 ,dt e u_2(t) = integral y_1(t) ,g(t) a vezes Wronskiano de y1 e y2 ,dt Lembrete: divida a E D O por a primeiro para deixar y duas linhas + p y linha + qy = g(t) .",
+      "file": "audio/t12-formula.mp3"
+    },
+    "t12-recipe": {
+      "text": "1 Ache y_1(t) e y_2(t) : Resolva a homogênea e calcule o Wronskiano W = y_1 y_2' - y_1' y_2 . 2 Integre u_1' e u_2' : Use as fórmulas u_1' = -y_2 g W e u_2' = y_1 g W . 3 Monte y particular : Multiplique u_1(t)y_1(t) + u_2(t)y_2(t) . Exemplo Clássico de Prova y duas linhas + y = secante (t) : Coeficientes indeterminados não funciona para secante (t) ! y_1 = cosseno t, y_2 = seno t implica que W = cosseno ao quadrado t + seno ao quadrado t = 1 . u_1 = - integral seno t secante t ,dt = logaritmo natural cosseno t e u_2 = integral cosseno t secante t ,dt = t . y particular (t) = cosseno (t) logaritmo natural cosseno t + t seno (t) .",
+      "file": "audio/t12-recipe.mp3"
+    },
+    "t12-drone": {
+      "text": "No Caso Central (O Drone): Rajada Exótica de Vento g(t) = secante (t)",
+      "file": "audio/t12-drone.mp3"
+    },
+    "t13-header": {
+      "text": "Tópico 13: Modelagem: Sistema Massa-Mola Circuito R L C . Física Mecânica e Elétrica são governadas exatamente pela mesma E D O de 2ª Ordem!",
+      "file": "audio/t13-header.mp3"
+    },
+    "t13-intuition": {
+      "text": "A Grande Analogia: A 2ª Lei de Newton num sistema Massa-Mola-Amortecedor e a Lei das Malhas de Kirchhoff num Circuito R L C produzem a mesmíssima equação diferencial !",
+      "file": "audio/t13-intuition.mp3"
+    },
+    "t13-formula": {
+      "text": "Massa-Mola: m ,x'' + ,x' + k ,x = F(t) Circuito R L C : L ,q'' + R ,q' + 1 sobre C ,q = E(t)",
+      "file": "audio/t13-formula.mp3"
+    },
+    "t13-recipe": {
+      "text": "Papel Físico na E D O Massa-Mola ( x ) Circuito R L C ( q ) Inércia (resiste a acelerar) Massa m Indutor L Dissipação (freia e gasta energia) Amortecedor Resistor R Restauração (puxa de volta) Mola k Capacitor 1/C",
+      "file": "audio/t13-recipe.mp3"
+    },
+    "t13-drone": {
+      "text": "No Caso Central (O Drone): Suspensão da Câmera Placa Eletrônica R L C",
+      "file": "audio/t13-drone.mp3"
+    },
+    "t14-header": {
+      "text": "Tópico 14: Crescimento e Decaimento: derivada de P sobre d t = kP . Quanto maior a quantidade atual P , mais rápido ela cresce ou decai!",
+      "file": "audio/t14-header.mp3"
+    },
+    "t14-intuition": {
+      "text": "Ideia Central: Quando a velocidade de variação derivada de P sobre d t é diretamente proporcional ao tamanho atual P (ex: bactérias se dividindo, juros compostos ou átomos radioativos decaindo), a solução é sempre uma exponencial !",
+      "file": "audio/t14-intuition.mp3"
+    },
+    "t14-formula": {
+      "text": "derivada de P sobre d t = kP Separando Variáveis P(t) = P_0 , e elevado a kt",
+      "file": "audio/t14-formula.mp3"
+    },
+    "t14-recipe": {
+      "text": "+ Crescimento ( k 0 ): Populações, colônias de bactérias e juros contínuos. Tempo de Duplicação: T_ dup = logaritmo natural 2 k . - Decaimento ( k Carbono-14, eliminação de fármacos no sangue. Meia-Vida (tempo para cair pela metade): tempo de meia-vida = logaritmo natural 2 k . Receita de Prova para Meia-Vida / Duplicação 1) Use P(0) = P_0 para achar a quantidade inicial. 2) Use o segundo dado de tempo (ex: \"dobrou em 3 horas\" implica que 2P_0 = P_0 e elevado a 3k ) para achar k = logaritmo natural 2 3 . 3) Com k em mãos, calcule P(t) para qualquer tempo pedido!",
+      "file": "audio/t14-recipe.mp3"
+    },
+    "t14-drone": {
+      "text": "No Caso Central (O Drone): Descarga da Bateria ( k 0 )",
+      "file": "audio/t14-drone.mp3"
+    }
+  }
+}
